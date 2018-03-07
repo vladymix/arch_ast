@@ -9,14 +9,19 @@ DateTools
 
 ```groovy
 Calendar getLastHourOfDay() 
+Calendar getStartHourOfDay() 
+
 Calendar createCalendar(int dayOfMonth, int monthOfYear, int year)
 Date getCurrentDate()
-Date getDateCurrentUTC()
+
 Date getStartYear()
 Date getEndYear()
+
 Date getDateFromSqlite(String date)
-String getDateToSqlite(Date date)
 Date getDateFromString(String date)
+
+String getDateToSqlite(Date date)
+String getDateCurrentUTC()
 ```
 
 ImageTools
@@ -40,7 +45,7 @@ Despues añadimos la dependencia de la libreria
 
 ```groovy
 dependencies {
-	compile 'com.github.vladymix:arch_ast:release_1.1'
+	compile 'com.github.vladymix:arch_ast:release_1.3'
 }
 ```
 O, puedes descargar manualmente `aar` y colocar en tus proyectos en el directorio `libs`
