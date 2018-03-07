@@ -62,7 +62,7 @@ public class DateTools {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
         String d = formatter.format(date);
-        return formatter.parse(d);
+        return getDateFromSqlite(d);
     }
 
     /**
@@ -82,8 +82,8 @@ public class DateTools {
      */
     public static Date getEndYear(){
         Calendar cl = Calendar.getInstance();
-        cl.set(Calendar.MONTH,11);
-        cl.set(Calendar.DAY_OF_MONTH, cl.getMaximum(Calendar.DAY_OF_MONTH));
+        cl.set(Calendar.MONTH, cl.getMaximum(Calendar.MONTH));
+        cl.set(Calendar.DAY_OF_MONTH, 31);
         cl.set(Calendar.HOUR,23);
         cl.set(Calendar.MINUTE,59);
         cl.set(Calendar.SECOND,59);
