@@ -1,5 +1,7 @@
 package com.altamirano.fabricio.apptest;
 
+import android.widget.EditText;
+
 import com.altamirano.fabricio.libraryast.Tools;
 
 import org.junit.Test;
@@ -13,7 +15,7 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class ToolsUnitTest {
 
     @Test
     public void collectionIsNull_isCorrect() throws Exception {

@@ -1,5 +1,8 @@
 package com.altamirano.fabricio.libraryast;
 
+import android.widget.EditText;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,5 +26,13 @@ public class Tools {
 
     public static boolean isNullOrEmpty(String value){
         return value==null || value.length() == 0 || value.trim().length() == 0;
+    }
+
+    public static boolean isNullOrEmpty(EditText value){
+        return value==null || isNullOrEmpty(value.getText());
+    }
+
+    public static boolean isNullOrEmpty(TextView value){
+        return value==null || isNullOrEmpty(value.getText());
     }
 }
