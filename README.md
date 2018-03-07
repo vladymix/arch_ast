@@ -1,10 +1,27 @@
 # Arquitectura Android
 Conjunto de artefactos para agilizar la el desarrolo
 
+![icon](https://github.com/vladymix/arch_ast/blob/master/AppTest/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+
 DateTools
 -------------
+# Métodos 
 
-![icon](https://github.com/vladymix/arch_ast/blob/master/AppTest/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+```groovy
+getLastHourOfDay() 
+createCalendar(int dayOfMonth, int monthOfYear, int year)
+getCurrentDate()
+getDateCurrentUTC()
+getStartYear()
+getEndYear()
+getDateFromSqlite(String date)
+getDateToSqlite(Date date)
+getDateFromString(String date)
+```
+
+ImageTools
+-------------
+
 
 ## How to add dependency?
 
