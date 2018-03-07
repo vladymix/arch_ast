@@ -5,18 +5,18 @@ Conjunto de artefactos para agilizar la el desarrolo
 
 DateTools
 -------------
-# Métodos 
+### Métodos 
 
 ```groovy
-getLastHourOfDay() 
-createCalendar(int dayOfMonth, int monthOfYear, int year)
-getCurrentDate()
-getDateCurrentUTC()
-getStartYear()
-getEndYear()
-getDateFromSqlite(String date)
-getDateToSqlite(Date date)
-getDateFromString(String date)
+Calendar getLastHourOfDay() 
+Calendar createCalendar(int dayOfMonth, int monthOfYear, int year)
+Date getCurrentDate()
+Date getDateCurrentUTC()
+Date getStartYear()
+Date getEndYear()
+Date getDateFromSqlite(String date)
+String getDateToSqlite(Date date)
+Date getDateFromString(String date)
 ```
 
 ImageTools
