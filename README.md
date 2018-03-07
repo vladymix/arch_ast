@@ -1,5 +1,5 @@
 # Arquitectura Android
-Conjunto de artefactos para agilizar la el desarrolo
+Conjunto de artefactos para agilizar el desarrolo
 
 ![icon](https://github.com/vladymix/arch_ast/blob/master/AppTest/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
 
