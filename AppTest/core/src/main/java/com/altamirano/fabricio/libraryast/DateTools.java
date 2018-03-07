@@ -59,7 +59,7 @@ public class DateTools {
      */
     public static Date getDateCurrentUTC() throws ParseException {
         Date date = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
         String d = formatter.format(date);
         return getDateFromSqlite(d);
@@ -71,6 +71,7 @@ public class DateTools {
     public static Date getStartYear(){
         Calendar cl = Calendar.getInstance();
         cl.set(Calendar.MONTH,0);
+        cl.set(Calendar.DAY_OF_MONTH, cl.getMinimum(Calendar.DAY_OF_MONTH));
         cl.set(Calendar.HOUR,0);
         cl.set(Calendar.MINUTE,0);
         cl.set(Calendar.SECOND,0);
@@ -84,9 +85,9 @@ public class DateTools {
         Calendar cl = Calendar.getInstance();
         cl.set(Calendar.MONTH, cl.getMaximum(Calendar.MONTH));
         cl.set(Calendar.DAY_OF_MONTH, 31);
-        cl.set(Calendar.HOUR,23);
-        cl.set(Calendar.MINUTE,59);
-        cl.set(Calendar.SECOND,59);
+        cl.set(Calendar.HOUR_OF_DAY, 23);
+        cl.set(Calendar.MINUTE, 59);
+        cl.set(Calendar.SECOND, 59);
         return  cl.getTime();
     }
 
