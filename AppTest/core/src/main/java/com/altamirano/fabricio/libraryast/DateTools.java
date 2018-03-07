@@ -17,6 +17,7 @@ import java.util.TimeZone;
 public class DateTools {
 
     private static DateFormat formatComplete = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
+    private static  final  DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
 
     /**
      * @return Return calendar as yyyy-MM-dd 23:59:59
@@ -26,6 +27,17 @@ public class DateTools {
         calendar.set(Calendar.HOUR_OF_DAY, 23);
         calendar.set(Calendar.MINUTE, 59);
         calendar.set(Calendar.SECOND, 59);
+        return calendar;
+    }
+
+    /**
+     * @return Return calendar as yyyy-MM-dd 23:59:59
+     */
+    public static Calendar getStartHourOfDay() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
         return calendar;
     }
 
@@ -57,12 +69,9 @@ public class DateTools {
     /**
      * @return date with format utc example SPAIN Summer -2 Winter -1
      */
-    public static Date getDateCurrentUTC() throws ParseException {
-        Date date = Calendar.getInstance().getTime();
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
+    public static String getDateCurrentUTC() throws ParseException {
         formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
-        String d = formatter.format(date);
-        return getDateFromSqlite(d);
+        return  formatter.format(new Date());
     }
 
     /**

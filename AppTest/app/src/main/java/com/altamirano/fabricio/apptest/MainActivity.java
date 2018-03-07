@@ -32,15 +32,24 @@ public class MainActivity extends AppCompatActivity {
 
         String values = "";
         values += "Date to sqlite "+ DateTools.getDateToSqlite(date);
+        values += "\nDate from sqlite "+ DateTools.getDateFromSqlite(DateTools.getDateToSqlite(date));
+
+        values += "\n";
         values += "\nCurrent date "+ DateTools.getCurrentDate();
         try{
             values += "\nCurrent date UTC "+ DateTools.getDateCurrentUTC();
         }catch (ParseException ex){
             ex.printStackTrace();
         }
+        values += "\n";
         values += "\nDate start year "+ DateTools.getStartYear();
         values += "\nDate end year "+ DateTools.getEndYear();
+
+        values += "\n";
+
+        values += "\nDate start hour day "+ DateTools.getStartHourOfDay().getTime();
         values += "\nDate last hour day "+ DateTools.getLastHourOfDay().getTime();
+
 
         return values;
     }
