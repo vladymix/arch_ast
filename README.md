@@ -27,7 +27,7 @@ String getDateCurrentUTC()
 ImageTools
 -------------
 
-![icon](https://github.com/vladymix/arch_ast/recursos/page_lib.png)
+![icon](https://github.com/vladymix/arch_ast/blob/master/recursos/page_lib.png)
 
 ### Métodos 
 
