@@ -27,8 +27,27 @@ String getDateCurrentUTC()
 ImageTools
 -------------
 
+![icon](https://github.com/vladymix/arch_ast/recursos/page_lib.png)
 
-## How to add dependency?
+### Métodos 
+
+```groovy
+Bitmap getCircleBitmap(Resources res, Bitmap source)
+Bitmap getCircleBitmap(Bitmap source)
+
+RoundedBitmapDrawable getCircleBitmapDrawable(Resources res, Bitmap source)
+RoundedBitmapDrawable getRoundedCornerBitmapDrawable(Resources res, Bitmap source, float cornerRadius)
+
+Bitmap getRoundedCornerBitmap(Drawable drawable, float cornerRadius)
+Bitmap getRoundedCornerBitmap(Bitmap bitmap, float cornerRadius)
+
+Bitmap getSquareBitmap(Bitmap bitmap)
+```
+
+
+
+## Como añadir la dependecia a nuestro proyecto?
+-------------
 
 Esta libreria no esta creada en Maven Central, pero podemos hacer uso con  [JitPack](https://jitpack.io)
 
