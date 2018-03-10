@@ -34,6 +34,7 @@ ImageTools
 ```groovy
 Bitmap getCircleBitmap(Resources res, Bitmap source)
 Bitmap getCircleBitmap(Bitmap source)
+Bitmap getCircleBitmap(Drawable source)
 
 RoundedBitmapDrawable getCircleBitmapDrawable(Resources res, Bitmap source)
 RoundedBitmapDrawable getRoundedCornerBitmapDrawable(Resources res, Bitmap source, float cornerRadius)
@@ -64,7 +65,7 @@ Despues añadimos la dependencia de la libreria
 
 ```groovy
 dependencies {
-	compile 'com.github.vladymix:arch_ast:release_1.3'
+	compile 'com.github.vladymix:arch_ast:release_2.1'
 }
 ```
 O, puedes descargar manualmente `aar` y colocar en tus proyectos en el directorio `libs`

@@ -32,6 +32,18 @@ public class ImageTools {
         return getRoundedCornerBitmapDrawable(res, square, square.getHeight()).getBitmap();
     }
 
+    /**
+     * @param source Drawable image
+     * @return Bitmap circle
+     */
+    public static Bitmap getCircleBitmap(Drawable source){
+        return getCircleBitmap(((BitmapDrawable) source).getBitmap());
+    }
+
+    /**
+     * @param source Bitmap
+     * @return Bitmap circle
+     */
     public static Bitmap getCircleBitmap(Bitmap source) {
         int width = 0;
         int height = 0;

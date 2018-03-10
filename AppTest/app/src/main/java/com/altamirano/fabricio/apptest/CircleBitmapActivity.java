@@ -25,6 +25,6 @@ public class CircleBitmapActivity extends AppCompatActivity {
 
         Bitmap originalBitmap = ((BitmapDrawable) originalDrawable).getBitmap();
 
-        imageView.setImageBitmap(ImageTools.getCircleBitmap(originalBitmap));
+        imageView.setImageBitmap(ImageTools.getSquareBitmap(originalBitmap));
     }
 }
