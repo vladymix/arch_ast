@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AppTest</string>
+    <string name="circle_image">Circle Image</string>
 </resources>

@@ -16,6 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:label="@string/circle_image"
+            android:name=".CircleBitmapActivity"/>
     </application>
 
 </manifest>

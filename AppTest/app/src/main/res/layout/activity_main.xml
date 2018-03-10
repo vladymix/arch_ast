@@ -12,5 +12,13 @@
         android:layout_height="wrap_content"
         android:text="Hello World!"/>
 
+    <Button
+        android:onClick="onNavigateTo"
+        android:id="@+id/btn_image_circle"
+        android:text="Circle Image"
+        app:layout_constraintTop_toBottomOf="@+id/tx_formats"
+        android:src="@drawable/bitmap_to_circle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </android.support.constraint.ConstraintLayout>
