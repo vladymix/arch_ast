@@ -171,6 +171,12 @@ public class ImageTools {
         }
     }
 
+    public static Drawable getDrawableChangeColor(Drawable d, int color) {
+        Drawable wrappedDrawable = DrawableCompat.wrap(d);
+        DrawableCompat.setTint(wrappedDrawable, color);
+        return wrappedDrawable;
+    }
+
 
 
 

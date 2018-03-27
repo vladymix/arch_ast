@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.altamirano.fabricio.libraryast.DateTools;
+import com.altamirano.fabricio.libraryast.DialogTools;
 import com.altamirano.fabricio.libraryast.ImageTools;
 
 import java.text.ParseException;
@@ -62,7 +63,15 @@ public class MainActivity extends AppCompatActivity {
         Intent navigate =null;
         switch (view.getId()){
             case R.id.btn_image_circle:
-                navigate = new Intent(this, CircleBitmapActivity.class);
+                DialogTools dg = new DialogTools();
+                dg.setCancelable(true);
+                dg.setImageCenter(getResources().getDrawable(R.drawable.ic_circle_java));
+                dg.setImageTitle(getResources().getDrawable(R.drawable.ic_android_studio));
+
+
+                dg.show(this.getFragmentManager(),"Hola");
+
+                //navigate = new Intent(this, CircleBitmapActivity.class);
                 break;
         }
 
