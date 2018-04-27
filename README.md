@@ -43,6 +43,32 @@ Bitmap getRoundedCornerBitmap(Drawable drawable, float cornerRadius)
 Bitmap getRoundedCornerBitmap(Bitmap bitmap, float cornerRadius)
 
 Bitmap getSquareBitmap(Bitmap bitmap)
+
+Drawable getDrawableChangedColor(Drawable drawable, int color)
+
+String encodeBitmapToBase64(Bitmap image)
+Bitmap decodeBase64ToBitmap(String inputBase64)
+
+```
+
+DialogTools
+-------------
+
+![icon](https://github.com/vladymix/arch_ast/blob/master/recursos/dialogtools.png)
+
+### Métodos 
+
+```groovy
+
+DialogTools  dialog  = new DialogTools().setTitle("Oh yeah! is time!")
+                        .setMessage("Add this dialog to facilitate your application, collaborate in github.com/vladymix")
+                        .setImageCenter(getResources().getDrawable(R.drawable.ic_circle_java))
+                        .setImageTitle(getResources().getDrawable(R.drawable.ic_android_studio))
+                        .setPrimaryButton("Ok", null)
+                        .setSecundaryButton("Cancel", null);
+
+             dialog.show(this.getFragmentManager(),"My customDialog");
+
 ```
 
 

@@ -61,23 +61,36 @@ public class MainActivity extends AppCompatActivity {
     public void onNavigateTo(View view) {
 
         Intent navigate =null;
+        final  DialogTools dg = new DialogTools();
+
         switch (view.getId()){
             case R.id.btn_image_circle:
-                DialogTools dg = new DialogTools();
-                dg.setCancelable(true);
-                dg.setImageCenter(getResources().getDrawable(R.drawable.ic_circle_java));
-                dg.setImageTitle(getResources().getDrawable(R.drawable.ic_android_studio));
 
+                dg.setTitle("Oh yeah! is time!")
+                        .setMessage("Add this dialog to facilitate your application, collaborate in github.com/vladymix")
+                        .setImageCenter(getResources().getDrawable(R.drawable.ic_circle_java))
+                        .setImageTitle(getResources().getDrawable(R.drawable.ic_android_studio))
+                        .setPrimaryButton("Ok", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dg.dismiss();
+                            }
+                        })
+                        .setSecundaryButton("Cancel", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dg.dismiss();
+                            }
+                        });
+                dg.setCancelable(false);
 
                 dg.show(this.getFragmentManager(),"Hola");
 
-                //navigate = new Intent(this, CircleBitmapActivity.class);
                 break;
         }
 
         if(navigate!=null){
             startActivity(navigate);
         }
-
     }
 }
