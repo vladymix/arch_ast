@@ -2,6 +2,7 @@ package com.altamirano.fabricio.libraryast;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
@@ -10,8 +11,12 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.util.Base64;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * @autor Created by Fabricio Altamirano on 7/3/18.
@@ -171,13 +176,36 @@ public class ImageTools {
         }
     }
 
-    public static Drawable getDrawableChangeColor(Drawable d, int color) {
-        Drawable wrappedDrawable = DrawableCompat.wrap(d);
+    /**
+     * @param drawable input any png file as drawable
+     * @param color send color with Color library as Color.Red
+     * @return Drawable with only color
+     */
+    public static Drawable getDrawableChangedColor(Drawable drawable, int color) {
+        Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
         DrawableCompat.setTint(wrappedDrawable, color);
         return wrappedDrawable;
     }
 
+    /**
+     * @param image input Image Bitmap
+     * @return code Bitmap as String Base64
+     */
+    public static String encodeBitmapToBase64(Bitmap image) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.PNG, 90, baos);
+        byte[] b = baos.toByteArray();
+        return Base64.encodeToString(b, Base64.DEFAULT);
+    }
 
+    /**
+     * @param inputBase64 String Base64
+     * @return Bitmap image
+     */
+    public static Bitmap decodeBase64ToBitmap(String inputBase64) {
+        byte[] decodedByte = Base64.decode(inputBase64, 0);
+        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
+    }
 
 
 }
