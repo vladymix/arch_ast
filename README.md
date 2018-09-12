@@ -71,6 +71,9 @@ DialogTools  dialog  = new DialogTools().setTitle("Oh yeah! is time!")
 
 ```
 
+OnBoardScreen
+-------------
+Pagina de bienvenida
 
 
 ## Como añadir la dependecia a nuestro proyecto?
@@ -91,7 +94,7 @@ Despues añadimos la dependencia de la libreria
 
 ```groovy
 dependencies {
-	compile 'com.github.vladymix:arch_ast:release_2.1'
+	implementation 'com.github.vladymix:arch_ast:release_2.3'
 }
 ```
 O, puedes descargar manualmente `aar` y colocar en tus proyectos en el directorio `libs`
