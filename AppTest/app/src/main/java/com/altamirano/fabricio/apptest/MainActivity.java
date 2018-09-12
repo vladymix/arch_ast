@@ -4,12 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.altamirano.fabricio.apptest.activities.OnBoardActivity;
 import com.altamirano.fabricio.libraryast.DateTools;
 import com.altamirano.fabricio.libraryast.DialogTools;
-import com.altamirano.fabricio.libraryast.ImageTools;
 
 import java.text.ParseException;
 import java.util.Calendar;
@@ -21,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         TextView tx = findViewById(R.id.tx_formats);
         tx.setText(dateTools());
 
@@ -60,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onNavigateTo(View view) {
 
+
+
         Intent navigate =null;
         final  DialogTools dg = new DialogTools();
 
@@ -86,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
 
                 dg.show(this.getFragmentManager(),"Hola");
 
+                break;
+            case R.id.btn_onbloard:
+                navigate = new Intent(this, OnBoardActivity.class);
                 break;
         }
 
