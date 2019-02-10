@@ -1,43 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     tools:context="com.altamirano.fabricio.apptest.MainActivity">
 
-    <TextView
-        android:id="@+id/tx_formats"
+    <ListView
+        android:id="@+id/listMenu"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"/>
-
-    <LinearLayout
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/tx_formats"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:onClick="onNavigateTo"
-            android:id="@+id/btn_image_circle"
-            android:text="Circle Image"
-            android:src="@drawable/bitmap_to_circle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <Button
-            android:onClick="onNavigateTo"
-            android:id="@+id/btn_onbloard"
-            android:text="On board"
-            app:layout_constraintTop_toBottomOf="@+id/tx_formats"
-            android:src="@drawable/bitmap_to_circle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-
-    <com.altamirano.fabricio.libraryast.onboard.OnBoardScreen
-        android:id="@+id/idBoardScreen"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
