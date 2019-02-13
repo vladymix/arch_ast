@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.altamirano.fabricio.apptest.activities.CircleBitmapActivity;
+import com.altamirano.fabricio.apptest.activities.InfoUrlActivity;
 import com.altamirano.fabricio.apptest.activities.OnBoardActivity;
 import com.altamirano.fabricio.apptest.activities.SquareBitmapActivity;
 import com.altamirano.fabricio.apptest.adapters.MenuAdapter;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         itms.add(new MenuItem(OnBoardActivity.class, "On Board", R.drawable.ic_on_board));
         itms.add(new MenuItem(SquareBitmapActivity.class, "Square Images", R.drawable.ic_images));
         itms.add(new MenuItem(CircleBitmapActivity.class, "Circle Images", R.drawable.ic_circle_images));
+        itms.add(new MenuItem(InfoUrlActivity.class, "Url load info", R.drawable.ic_loadurl));
         itms.add(new MenuItem(null));
         itms.add(new MenuItem(null));
 
