@@ -1,5 +1,6 @@
 package com.altamirano.fabricio.apptest;
 
+import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,13 +8,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.altamirano.fabricio.apptest.activities.BasicButtonsActivity;
 import com.altamirano.fabricio.apptest.activities.CircleBitmapActivity;
+import com.altamirano.fabricio.apptest.activities.ExpandableBasicActivity;
 import com.altamirano.fabricio.apptest.activities.InfoUrlActivity;
 import com.altamirano.fabricio.apptest.activities.OnBoardActivity;
 import com.altamirano.fabricio.apptest.activities.SquareBitmapActivity;
 import com.altamirano.fabricio.apptest.adapters.MenuAdapter;
 import com.altamirano.fabricio.apptest.commons.MenuItem;
 import com.altamirano.fabricio.libraryast.DateTools;
+import com.altamirano.fabricio.libraryast.Utils.ViewAnimation;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -35,8 +39,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         itms.add(new MenuItem(SquareBitmapActivity.class, "Square Images", R.drawable.ic_images));
         itms.add(new MenuItem(CircleBitmapActivity.class, "Circle Images", R.drawable.ic_circle_images));
         itms.add(new MenuItem(InfoUrlActivity.class, "Url load info", R.drawable.ic_loadurl));
-        itms.add(new MenuItem(null));
-        itms.add(new MenuItem(null));
+        itms.add(new MenuItem(BasicButtonsActivity.class, "Buttons", R.drawable.ic_loadurl));
+        itms.add(new MenuItem(ExpandableBasicActivity.class, "Expandable basic", R.drawable.ic_arrow_downward));
+
 
         this.listMenu.setAdapter(new MenuAdapter(this, itms));
         this.listMenu.setOnItemClickListener(this);
@@ -44,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+      //  ViewAnimation.showIn(view);
         MenuItem menu = (MenuItem) adapterView.getItemAtPosition(i);
         if (menu.getKlass() != null) {
             Intent intent = new Intent(MainActivity.this, menu.getKlass());
