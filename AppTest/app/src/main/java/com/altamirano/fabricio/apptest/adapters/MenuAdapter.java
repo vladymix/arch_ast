@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.altamirano.fabricio.apptest.R;
 import com.altamirano.fabricio.apptest.commons.MenuItem;
+import com.altamirano.fabricio.libraryast.Utils.ViewAnimation;
 
 import java.util.List;
 
@@ -36,7 +37,9 @@ public class MenuAdapter extends ArrayAdapter<MenuItem> {
             menu_text.setText(item.getTitle());
             img_menu.setImageResource(item.getImageId());
         }
-
+        ViewAnimation.fadeIn(convertView);
         return convertView;
     }
+
+
 }

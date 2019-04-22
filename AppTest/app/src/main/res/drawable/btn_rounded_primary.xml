@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <layer-list>
+            <item android:left="4.0dip" android:top="4.0dip" android:right="4.0dip" android:bottom="4.0dip">
+                <shape android:shape="rectangle">
+                    <corners android:radius="60.0dip" android:topLeftRadius="30.0dip" android:topRightRadius="30.0dip" android:bottomLeftRadius="30.0dip" android:bottomRightRadius="30.0dip" />
+                    <solid android:color="@color/colorPrimaryDark" />
+                    <padding android:left="0.0dip" android:top="0.0dip" android:right="0.0dip" android:bottom="0.0dip" />
+                    <size android:height="40.0dip" android:width="110.0dip" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <item android:state_focused="true">
+        <layer-list>
+            <item android:left="4.0dip" android:top="4.0dip" android:right="4.0dip" android:bottom="4.0dip">
+                <shape android:shape="rectangle">
+                    <corners android:radius="60.0dip" android:topLeftRadius="30.0dip" android:topRightRadius="30.0dip" android:bottomLeftRadius="30.0dip" android:bottomRightRadius="30.0dip" />
+                    <solid android:color="@color/colorPrimaryDark" />
+                    <padding android:left="0.0dip" android:top="0.0dip" android:right="0.0dip" android:bottom="0.0dip" />
+                    <size android:height="40.0dip" android:width="110.0dip" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <item>
+        <layer-list>
+            <item android:left="4.0dip" android:top="4.0dip" android:right="4.0dip" android:bottom="4.0dip">
+                <shape android:shape="rectangle">
+                    <corners android:radius="60.0dip" android:topLeftRadius="30.0dip" android:topRightRadius="30.0dip" android:bottomLeftRadius="30.0dip" android:bottomRightRadius="30.0dip" />
+                    <solid android:color="@color/colorPrimary" />
+                    <padding android:left="0.0dip" android:top="0.0dip" android:right="0.0dip" android:bottom="0.0dip" />
+                    <size android:height="40.0dip" android:width="110.0dip" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>
