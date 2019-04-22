@@ -2,6 +2,7 @@ package com.altamirano.fabricio.libraryast.onboard;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
@@ -24,8 +25,9 @@ public class OnBoardScreen extends RelativeLayout {
     private LinearLayout pager_indicator;
     private ViewPager onboard_pager;
     private Button btn_get_started;
-    private OnBoardAdapter mAdapter;
-    int previous_pos=0;
+    // private OnBoardAdapter mAdapter;
+    private PagerAdapter mAdapter;
+    int previous_pos = 0;
     private int dotsCount;
     private ImageView[] dots;
 
@@ -43,25 +45,75 @@ public class OnBoardScreen extends RelativeLayout {
         super(context, attrs, defStyle);
         init();
     }
-    private void init(){
+
+    private void init() {
         inflate(getContext(), R.layout.on_board_layout, this);
-        onboard_pager =  findViewById(R.id.pager_introduction);
-        pager_indicator =  findViewById(R.id.viewPagerCountDots);
-        btn_get_started =  findViewById(R.id.btn_get_started);
-        /*this.header = (TextView)findViewById(R.id.header);
-        this.description = (TextView)findViewById(R.id.description);
-        this.thumbnail = (ImageView)findViewById(R.id.thumbnail);
-        this.icon = (ImageView)findViewById(R.id.icon);*/
+        onboard_pager = findViewById(R.id.pager_introduction);
+        pager_indicator = findViewById(R.id.viewPagerCountDots);
+        btn_get_started = findViewById(R.id.btn_get_started);
     }
 
 
-    public void configure(ArrayList<OnBoardItem> onBoardItems, String labelButton, OnClickListener action){
-        mAdapter = new OnBoardAdapter(this.getContext(), onBoardItems);
-        dotsCount = mAdapter.getCount();
-        dots = new ImageView[dotsCount];
+    public void setAdapter(PagerAdapter adapter) {
+        this.mAdapter = adapter;
+        this.configByAdapter();
+    }
+
+    public void setEndButton(String labelButton, OnClickListener action) {
         btn_get_started.setText(labelButton);
         btn_get_started.setOnClickListener(action);
+    }
 
+
+    public void setAdapterDefault(ArrayList<OnBoardItem> onBoardItems) {
+        this.mAdapter = new OnBoardAdapter(this.getContext(), onBoardItems);
+        this.configByAdapter();
+    }
+
+    private void configByAdapter() {
+        this.configureDonuts();
+        this.configureOnBoardPage();
+    }
+
+    private void configureOnBoardPage() {
+
+        onboard_pager.setAdapter(mAdapter);
+        onboard_pager.setCurrentItem(0);
+        onboard_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                // Change the current position intimation
+                for (int i = 0; i < dotsCount; i++) {
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(OnBoardScreen.this.getContext(), R.drawable.non_selected_item_dot));
+                }
+                dots[position].setImageDrawable(ContextCompat.getDrawable(OnBoardScreen.this.getContext(), R.drawable.selected_item_dot));
+
+                int pos = position + 1;
+
+                if (pos == dotsCount && previous_pos == (dotsCount - 1))
+                    show_animation();
+                else if (pos == (dotsCount - 1) && previous_pos == dotsCount)
+                    hide_animation();
+
+                previous_pos = pos;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+    private void configureDonuts() {
+        dotsCount = mAdapter.getCount();
+        dots = new ImageView[dotsCount];
         for (int i = 0; i < dotsCount; i++) {
             dots[i] = new ImageView(this.getContext());
             dots[i].setImageDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.non_selected_item_dot));
@@ -77,47 +129,9 @@ public class OnBoardScreen extends RelativeLayout {
         }
 
         dots[0].setImageDrawable(ContextCompat.getDrawable(this.getContext(), R.drawable.selected_item_dot));
-
-
-
-        onboard_pager.setAdapter(mAdapter);
-        onboard_pager.setCurrentItem(0);
-        onboard_pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-                // Change the current position intimation
-
-                for (int i = 0; i < dotsCount; i++) {
-                    dots[i].setImageDrawable(ContextCompat.getDrawable(OnBoardScreen.this.getContext(), R.drawable.non_selected_item_dot));
-                }
-
-                dots[position].setImageDrawable(ContextCompat.getDrawable(OnBoardScreen.this.getContext(), R.drawable.selected_item_dot));
-
-
-                int pos=position+1;
-
-                if(pos==dotsCount&&previous_pos==(dotsCount-1))
-                    show_animation();
-                else if(pos==(dotsCount-1)&&previous_pos==dotsCount)
-                    hide_animation();
-
-                previous_pos=pos;
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
-    public void show_animation()
-    {
+
+    public void show_animation() {
         Animation show = AnimationUtils.loadAnimation(this.getContext(), R.anim.slide_up_anim);
 
         btn_get_started.startAnimation(show);
@@ -137,7 +151,6 @@ public class OnBoardScreen extends RelativeLayout {
             public void onAnimationEnd(Animation animation) {
 
                 btn_get_started.clearAnimation();
-
             }
 
         });
@@ -145,8 +158,7 @@ public class OnBoardScreen extends RelativeLayout {
 
     }
 
-    public void hide_animation()
-    {
+    public void hide_animation() {
         Animation hide = AnimationUtils.loadAnimation(this.getContext(), R.anim.slide_down_anim);
 
         btn_get_started.startAnimation(hide);

@@ -15,13 +15,11 @@
         android:layout_height="16dp"
         android:layout_above="@+id/ll_footer"
         android:layout_marginBottom="12dp"
-        android:layout_alignParentLeft="true"
         android:gravity="center"
         android:orientation="horizontal" />
 
     <LinearLayout
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:id="@+id/ll_footer"
         android:layout_width="match_parent"
         android:layout_height="50dp"

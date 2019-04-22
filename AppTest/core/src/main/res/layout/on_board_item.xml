@@ -1,60 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-    >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-    <ImageView
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:id="@+id/iv_onboard"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:gravity="center"
-        android:scaleType="fitXY" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_below="@+id/iv_onboard"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/iv_onboard"
+            android:src="@drawable/non_selected_item_dot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="fitCenter"/>
 
         <LinearLayout
-            android:layout_centerVertical="true"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="tv_header"
+                android:layout_margin="20dp"
                 android:gravity="center"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
+                android:textStyle="bold"
+                android:text="Find nearby stops"
                 android:textAllCaps="true"
-                android:textColor="#4A4A4A"
-                android:textSize="22sp" />
+                android:textSize="22sp"/>
 
             <TextView
                 android:id="@+id/tv_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="tv_desc"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
-                android:textColor="#4A4A4A"
-                android:textSize="18sp" />
+                android:text="Puedes encontrar todas las paradas que esten cerca de ti con un solo click"
 
+                android:textSize="18sp"/>
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
-
-</LinearLayout>
+</RelativeLayout>
