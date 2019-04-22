@@ -40,11 +40,13 @@ public class OnBoardActivity extends AppCompatActivity {
 
         OnBoardScreen screen = findViewById(R.id.idBoardScreen);
 
-        screen.configure(onBoardItems, "Begin", new View.OnClickListener() {
+        screen.setAdapterDefault(onBoardItems);
+        screen.setEndButton("Begin", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(OnBoardActivity.this,"OK",Toast.LENGTH_LONG).show();
             }
         });
+
     }
 }
