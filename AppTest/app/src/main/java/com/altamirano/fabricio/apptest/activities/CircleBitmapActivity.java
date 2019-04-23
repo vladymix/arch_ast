@@ -3,14 +3,12 @@ package com.altamirano.fabricio.apptest.activities;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.altamirano.fabricio.apptest.R;
-import com.altamirano.fabricio.libraryast.ImageTools;
+import com.altamirano.fabricio.libraryast.tools.ImageTools;
 
 public class CircleBitmapActivity extends AppCompatActivity {
 

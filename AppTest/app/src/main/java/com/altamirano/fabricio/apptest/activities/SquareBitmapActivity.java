@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.altamirano.fabricio.apptest.R;
-import com.altamirano.fabricio.libraryast.ImageTools;
+import com.altamirano.fabricio.libraryast.tools.ImageTools;
 
 public class SquareBitmapActivity extends AppCompatActivity {
 

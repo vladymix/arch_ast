@@ -1,19 +1,15 @@
-package com.altamirano.fabricio.libraryast;
+package com.altamirano.fabricio.libraryast.tools;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.altamirano.fabricio.libraryast.R;
 import com.altamirano.fabricio.libraryast.Utils.A;
 import com.altamirano.fabricio.libraryast.controllers.CustomImageDialog;
 

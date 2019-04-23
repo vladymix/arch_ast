@@ -1,19 +1,3 @@
-/*
- * Copyright 2014 Wouter Dullaert
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.altamirano.fabricio.swipe;
 
 import android.content.Context;
@@ -27,11 +11,6 @@ import android.widget.FrameLayout;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Class to hold a ListView item and the swipe backgrounds
- *
- * Created by wdullaer on 22.06.14.
- */
 public class SwipeViewGroup extends FrameLayout implements Checkable {
     private View contentView = null;
 
@@ -60,6 +39,7 @@ public class SwipeViewGroup extends FrameLayout implements Checkable {
      * Common code for all the constructors
      */
     private void initialize() {
+        this.setFocusable(false);
         // Allows click events to reach the ListView in case the row has a clickable View like a Button
         // FIXME: probably messes with accessibility. Doesn't fix root cause (see onTouchEvent)
         setDescendantFocusability(FOCUS_BLOCK_DESCENDANTS);

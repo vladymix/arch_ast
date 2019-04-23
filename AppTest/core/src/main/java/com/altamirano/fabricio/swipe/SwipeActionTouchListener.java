@@ -1,20 +1,3 @@
-/*
-* Copyright 2013 Google Inc
-* Copyright 2014 Wouter Dullaert
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
-
 package com.altamirano.fabricio.swipe;
 
 import android.animation.Animator;
@@ -28,7 +11,6 @@ import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.view.ViewPropertyAnimator;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
@@ -36,40 +18,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * A {@link View.OnTouchListener} that makes the list items in a {@link ListView}
- * dismissable. {@link ListView} is given special treatment because by default it handles touches
- * for its list items... i.e. it's in charge of drawing the pressed state (the list selector),
- * handling list item clicks, etc.
- *
- * <p>After creating the listener, the caller should also call
- * {@link ListView#setOnScrollListener(AbsListView.OnScrollListener)}, passing
- * in the scroll listener returned by {@link #makeScrollListener()}. If a scroll listener is
- * already assigned, the caller should still pass scroll changes through to this listener. This will
- * ensure that this {@link SwipeActionTouchListener} is paused during list view
- * scrolling.</p>
- *
- * <p>Example usage:</p>
- *
- * <pre>
- * SwipeActionTouchListener touchListener =
- * new SwipeActionTouchListener(
- * listView,
- * new SwipeActionTouchListener.OnDismissCallback() {
- * public void onDismiss(ListView listView, int[] reverseSortedPositions) {
- * for (int position : reverseSortedPositions) {
- * adapter.remove(adapter.getItem(position));
- * }
- * adapter.notifyDataSetChanged();
- * }
- * });
- * listView.setOnTouchListener(touchListener);
- * listView.setOnScrollListener(touchListener.makeScrollListener());
- * </pre>
- *
- * <p>This class Requires API level 12 or later due to use of {@link
- * ViewPropertyAnimator}.</p>
- */
 public class SwipeActionTouchListener implements View.OnTouchListener {
     // Cached ViewConfiguration and system-wide constant values
     private int mSlop;
@@ -255,7 +203,7 @@ public class SwipeActionTouchListener implements View.OnTouchListener {
     protected void setNormalSwipeFraction(float normalSwipeFraction) {
         mNormalSwipeFraction = normalSwipeFraction;
     }
-    
+
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         if (mViewWidth < 2) {
@@ -432,13 +380,17 @@ public class SwipeActionTouchListener implements View.OnTouchListener {
                     mCallbacks.onSwipeStarted(mListView, mDownPosition, mDirection);
                     if(mDirection.isLeft() && deltaX > 0 || mDirection.isRight() && deltaX < 0) mFar = false;
                     if(!mFar && Math.abs(deltaX) > mViewWidth*mFarSwipeFraction) mFar = true;
-                    if(!mFar) mDirection = (deltaX > 0 ? SwipeDirection.DIRECTION_NORMAL_RIGHT : SwipeDirection.DIRECTION_NORMAL_LEFT);
-                    else mDirection = (deltaX > 0 ? SwipeDirection.DIRECTION_FAR_RIGHT : SwipeDirection.DIRECTION_FAR_LEFT);
+                    if(!mFar)
+                        mDirection = (deltaX > 0 ? SwipeDirection.DIRECTION_NORMAL_RIGHT : SwipeDirection.DIRECTION_NORMAL_LEFT);
+                    else
+                        mDirection = (deltaX > 0 ? SwipeDirection.DIRECTION_FAR_RIGHT : SwipeDirection.DIRECTION_FAR_LEFT);
+
                     if(mCallbacks.hasActions(mDownPosition, mDirection)) {
                         mDownViewGroup.showBackground(mDirection, mDimBackgrounds && (Math.abs(deltaX) < mViewWidth*mNormalSwipeFraction));
                         mDownView.setTranslationX(deltaX - mSwipingSlop);
-                        if(mFadeOut) mDownView.setAlpha(Math.max(0f, Math.min(1f,
-                                    1f - 2f * Math.abs(deltaX) / mViewWidth)));
+                        if(mFadeOut)
+                            mDownView.setAlpha(Math.max(0f, Math.min(1f, 1f - 2f * Math.abs(deltaX) / mViewWidth)));
+
                         mListView.invalidate();
                         return true;
                     }
@@ -523,7 +475,7 @@ public class SwipeActionTouchListener implements View.OnTouchListener {
                     // animation with a stale position
                     mDownPosition = ListView.INVALID_POSITION;
 
-                    
+
                     for (PendingDismissData pendingDismiss : mPendingDismisses) {
                         // Reset view presentation
                         pendingDismiss.view.setAlpha(1f);

@@ -1,6 +1,5 @@
 package com.altamirano.fabricio.apptest;
 
-import android.animation.Animator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,12 +11,12 @@ import com.altamirano.fabricio.apptest.activities.BasicButtonsActivity;
 import com.altamirano.fabricio.apptest.activities.CircleBitmapActivity;
 import com.altamirano.fabricio.apptest.activities.ExpandableBasicActivity;
 import com.altamirano.fabricio.apptest.activities.InfoUrlActivity;
+import com.altamirano.fabricio.apptest.activities.ListSwipeActivity;
 import com.altamirano.fabricio.apptest.activities.OnBoardActivity;
 import com.altamirano.fabricio.apptest.activities.SquareBitmapActivity;
 import com.altamirano.fabricio.apptest.adapters.MenuAdapter;
 import com.altamirano.fabricio.apptest.commons.MenuItem;
-import com.altamirano.fabricio.libraryast.DateTools;
-import com.altamirano.fabricio.libraryast.Utils.ViewAnimation;
+import com.altamirano.fabricio.libraryast.tools.DateTools;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -41,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         itms.add(new MenuItem(InfoUrlActivity.class, "Url load info", R.drawable.ic_loadurl));
         itms.add(new MenuItem(BasicButtonsActivity.class, "Buttons", R.drawable.ic_loadurl));
         itms.add(new MenuItem(ExpandableBasicActivity.class, "Expandable basic", R.drawable.ic_arrow_downward));
+        itms.add(new MenuItem(ListSwipeActivity.class, "Swipe List", R.drawable.ic_arrow_downward));
 
 
         this.listMenu.setAdapter(new MenuAdapter(this, itms));

@@ -1,8 +1,6 @@
 package com.altamirano.fabricio.apptest;
 
-import android.widget.EditText;
-
-import com.altamirano.fabricio.libraryast.Tools;
+import com.altamirano.fabricio.libraryast.tools.Tools;
 
 import org.junit.Test;
 

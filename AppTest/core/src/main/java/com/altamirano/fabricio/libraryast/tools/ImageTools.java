@@ -1,4 +1,4 @@
-package com.altamirano.fabricio.libraryast;
+package com.altamirano.fabricio.libraryast.tools;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
