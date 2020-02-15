@@ -17,6 +17,7 @@ import com.altamirano.fabricio.apptest.activities.OnBoardActivity;
 import com.altamirano.fabricio.apptest.activities.SquareBitmapActivity;
 import com.altamirano.fabricio.apptest.adapters.MenuAdapter;
 import com.altamirano.fabricio.apptest.commons.MenuItem;
+import com.altamirano.fabricio.dialog.DialogPassword;
 import com.altamirano.fabricio.libraryast.tools.DateTools;
 
 import java.text.ParseException;
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         this.listMenu.setAdapter(new MenuAdapter(this, itms));
         this.listMenu.setOnItemClickListener(this);
+
+        new DialogPassword(this,"1234").show();
     }
 
     @Override

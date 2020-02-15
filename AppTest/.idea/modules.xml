@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AppTest.iml" filepath="$PROJECT_DIR$/AppTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/AppTest-app.iml" filepath="$PROJECT_DIR$/app/AppTest-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/AppTest-core.iml" filepath="$PROJECT_DIR$/core/AppTest-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/arch_ast-AppTest.iml" filepath="$PROJECT_DIR$/arch_ast-AppTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
     </modules>
   </component>
