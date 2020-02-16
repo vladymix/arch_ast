@@ -43,9 +43,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         itms.add(new MenuItem(BasicButtonsActivity.class, "Buttons", R.drawable.ic_loadurl));
         itms.add(new MenuItem(ExpandableBasicActivity.class, "Expandable basic", R.drawable.ic_arrow_downward));
         itms.add(new MenuItem(ListSwipeActivity.class, "Swipe List", R.drawable.ic_arrow_downward));
-
         itms.add(new MenuItem(ListValidateActivity.class, "Swipe List Validate", R.drawable.ic_arrow_downward));
-
 
         this.listMenu.setAdapter(new MenuAdapter(this, itms));
         this.listMenu.setOnItemClickListener(this);

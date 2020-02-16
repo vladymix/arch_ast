@@ -1,11 +1,11 @@
 package com.altamirano.fabricio.dialog
 
+import android.annotation.TargetApi
 import android.app.Dialog
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
-import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -13,20 +13,22 @@ import android.widget.Toast
 import com.altamirano.fabricio.libraryast.R
 
 //ic_launcher
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 class DialogPassword(context: Context, val Password: String) :
-        Dialog(context) {
+        Dialog(context, android.R.style.ThemeOverlay) {
 
     private var input = ""
 
     private lateinit var txt_mask: TextView
 
     init {
-        this.setCancelable(false)
 
+        this.setCancelable(false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+       // this.window?.requestFeature(Window.FEATURE_ACTION_BAR)
         setContentView(R.layout.ast_dialog_pin)
 
         txt_mask = findViewById(R.id.txt_mask)
@@ -45,7 +47,9 @@ class DialogPassword(context: Context, val Password: String) :
         findViewById<LinearLayout>(R.id.btn_del).setOnClickListener { this.onClickView(it) }
         findViewById<LinearLayout>(R.id.btn_ok).setOnClickListener { this.onClickView(it) }
 
-        this.window?.let {
+        this.window?.getAttributes()?.windowAnimations = R.style.ASTDialogAnimation
+
+    /*   this.window?.let {
             val wlp = it.attributes
             wlp?.gravity = Gravity.CENTER;
             wlp?.flags = wlp.flags and WindowManager.LayoutParams.FLAG_BLUR_BEHIND.inv()
@@ -55,6 +59,11 @@ class DialogPassword(context: Context, val Password: String) :
                     WindowManager.LayoutParams.MATCH_PARENT
             )
         }
+
+
+        this.window?.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN)
+        this.window?.addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
+        this.window?.setBackgroundDrawable(ColorDrawable(Color.WHITE))*/
 
 
         (findViewById<ImageView>(R.id.ast_image)).setImageDrawable( this.context.packageManager.getApplicationIcon(this.context.applicationInfo))
