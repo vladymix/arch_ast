@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 11
-        versionName "2.6"
+        versionCode 32
+        versionName "3.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
