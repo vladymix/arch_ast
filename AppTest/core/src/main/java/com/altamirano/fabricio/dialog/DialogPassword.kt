@@ -14,8 +14,8 @@ import com.altamirano.fabricio.libraryast.R
 
 //ic_launcher
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-class DialogPassword(context: Context, val Password: String) :
-        Dialog(context, android.R.style.ThemeOverlay) {
+class DialogPassword(context: Context, private val password: String, theme:Int = android.R.style.ThemeOverlay) :
+        Dialog(context, theme) {
 
     private var input = ""
 
@@ -74,7 +74,7 @@ class DialogPassword(context: Context, val Password: String) :
     private fun onClickView(view: View) {
         when (view.id) {
             R.id.btn_ok -> {
-                if (this.input.equals(this.Password)) this.dismiss() else Toast.makeText(
+                if (this.input.equals(this.password)) this.dismiss() else Toast.makeText(
                         this.context,
                         "ERROR",
                         Toast.LENGTH_LONG
@@ -118,13 +118,13 @@ class DialogPassword(context: Context, val Password: String) :
     }
 
     fun inputValue(v: Int) {
-        if (this.input.length < this.Password.length) {
+        if (this.input.length < this.password.length) {
             this.input += v
             updateMask();
         }
 
-        if (this.input.length == this.Password.length) {
-            if (this.input.equals(this.Password)) this.dismiss()
+        if (this.input.length == this.password.length) {
+            if (this.input.equals(this.password)) this.dismiss()
         }
     }
 
@@ -135,7 +135,7 @@ class DialogPassword(context: Context, val Password: String) :
             inputMask += "◉ "
         }
 
-        for (i in 1..Password.length - input.length) {
+        for (i in 1..password.length - input.length) {
             inputMask += "◎ "
         }
 

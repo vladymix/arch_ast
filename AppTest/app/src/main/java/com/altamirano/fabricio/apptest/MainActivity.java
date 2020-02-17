@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         this.listMenu.setAdapter(new MenuAdapter(this, itms));
         this.listMenu.setOnItemClickListener(this);
 
-        new DialogPassword(this,"1234").show();
+        new DialogPassword(this,"1234", R.style.AppTheme_PopupOverlay).show();
     }
 
     @Override
