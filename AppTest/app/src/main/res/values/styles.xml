@@ -3,8 +3,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorBlack_27</item>
+        <item name="colorPrimaryDark">@color/colorBlack_27</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
@@ -40,6 +40,14 @@
     <style name="Button.White.Primary" parent="@style/Widget.AppCompat.Button.Colored">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="colorButtonNormal">@android:color/white</item>
+    </style>
+
+
+    <style name="AppThemeColor" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
 </resources>

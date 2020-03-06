@@ -1,4 +1,4 @@
-package com.altamirano.fabricio.dialog
+package com.altamirano.fabricio.dialogs
 
 import android.annotation.TargetApi
 import android.app.Dialog
@@ -9,26 +9,27 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import com.altamirano.fabricio.libraryast.R
 
 //ic_launcher
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-class DialogPassword(context: Context, private val password: String, theme:Int = android.R.style.ThemeOverlay) :
+class DialogPassword(context: Context, private val password: String, theme: Int = android.R.style.ThemeOverlay) :
         Dialog(context, theme) {
 
     private var input = ""
+    private var intents = 0
+
+    var resultListener: DialogResultListener? = null
 
     private lateinit var txt_mask: TextView
 
     init {
-
         this.setCancelable(false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // this.window?.requestFeature(Window.FEATURE_ACTION_BAR)
+        // this.window?.requestFeature(Window.FEATURE_ACTION_BAR)
         setContentView(R.layout.ast_dialog_pin)
 
         txt_mask = findViewById(R.id.txt_mask)
@@ -49,24 +50,24 @@ class DialogPassword(context: Context, private val password: String, theme:Int =
 
         this.window?.getAttributes()?.windowAnimations = R.style.ASTDialogAnimation
 
-    /*   this.window?.let {
-            val wlp = it.attributes
-            wlp?.gravity = Gravity.CENTER;
-            wlp?.flags = wlp.flags and WindowManager.LayoutParams.FLAG_BLUR_BEHIND.inv()
-            it.setAttributes(wlp);
-            it.setLayout(
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.MATCH_PARENT
-            )
-        }
+        /*   this.window?.let {
+                val wlp = it.attributes
+                wlp?.gravity = Gravity.CENTER;
+                wlp?.flags = wlp.flags and WindowManager.LayoutParams.FLAG_BLUR_BEHIND.inv()
+                it.setAttributes(wlp);
+                it.setLayout(
+                        WindowManager.LayoutParams.MATCH_PARENT,
+                        WindowManager.LayoutParams.MATCH_PARENT
+                )
+            }
 
 
-        this.window?.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN)
-        this.window?.addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
-        this.window?.setBackgroundDrawable(ColorDrawable(Color.WHITE))*/
+            this.window?.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN)
+            this.window?.addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
+            this.window?.setBackgroundDrawable(ColorDrawable(Color.WHITE))*/
 
 
-        (findViewById<ImageView>(R.id.ast_image)).setImageDrawable( this.context.packageManager.getApplicationIcon(this.context.applicationInfo))
+        (findViewById<ImageView>(R.id.ast_image)).setImageDrawable(this.context.packageManager.getApplicationIcon(this.context.applicationInfo))
         this.updateMask()
 
     }
@@ -74,11 +75,7 @@ class DialogPassword(context: Context, private val password: String, theme:Int =
     private fun onClickView(view: View) {
         when (view.id) {
             R.id.btn_ok -> {
-                if (this.input.equals(this.password)) this.dismiss() else Toast.makeText(
-                        this.context,
-                        "ERROR",
-                        Toast.LENGTH_LONG
-                ).show()
+                this.onCheckPassword()
             }
             R.id.btn_del -> {
                 this.input = ""
@@ -117,19 +114,30 @@ class DialogPassword(context: Context, private val password: String, theme:Int =
         }
     }
 
-    fun inputValue(v: Int) {
+    private fun onCheckPassword() {
+        if (this.input.equals(this.password)) {
+            resultListener?.onCorrectPassword(this, intents)
+            this.dismiss()
+        } else {
+            intents++
+            resultListener?.onErrorPassword(this, intents)
+        }
+    }
+
+   private fun inputValue(v: Int) {
         if (this.input.length < this.password.length) {
             this.input += v
             updateMask();
         }
 
         if (this.input.length == this.password.length) {
-            if (this.input.equals(this.password)) this.dismiss()
+            this.onCheckPassword()
+            this.input = ""
+            this.updateMask()
         }
     }
 
-    fun updateMask() {
-
+    private fun updateMask() {
         var inputMask = ""
         for (i in 1..input.length) {
             inputMask += "◉ "
@@ -141,6 +149,5 @@ class DialogPassword(context: Context, private val password: String, theme:Int =
 
         txt_mask.setText(inputMask)
     }
-
 
 }

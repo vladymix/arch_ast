@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1A1A1A</color>
-    <color name="colorPrimaryDark">#1A1A1A</color>
-    <color name="colorAccent">#0088ff</color>
+    <color name="colorPrimary">#0088ff</color>
+    <color name="colorPrimaryDark">#0088ff</color>
+    <color name="colorAccent">#FF0084</color>
     <color name="colorWhite">#fff</color>
+    <color name="colorBlack_27">#272727</color>
     <color name="colorBlue">#fff</color>
 
     <color name="abc_input_method_navigation_guard">@android:color/black</color>

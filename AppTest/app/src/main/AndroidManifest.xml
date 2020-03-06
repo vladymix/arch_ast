@@ -11,12 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ListValidateActivity"></activity>
-        <activity android:name=".activities.ListSwipeActivity"></activity>
-        <activity android:name=".activities.ExpandableBasicActivity"></activity>
-        <activity android:name=".activities.BasicButtonsActivity"></activity>
-        <activity android:name=".activities.InfoUrlActivity"></activity>
-        <activity android:name=".activities.SquareBitmapActivity"></activity>
+        <activity android:name=".activities.dialogs.ColorPickerActivity"></activity>
+        <activity android:name=".activities.ListValidateActivity" />
+        <activity android:name=".activities.ListSwipeActivity" />
+        <activity android:name=".activities.ExpandableBasicActivity" />
+        <activity android:name=".activities.BasicButtonsActivity" />
+        <activity android:name=".activities.InfoUrlActivity" />
+        <activity android:name=".activities.SquareBitmapActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +28,7 @@
         <activity
             android:name=".activities.CircleBitmapActivity"
             android:label="@string/circle_image" />
-        <activity android:name=".activities.OnBoardActivity"></activity>
+        <activity android:name=".activities.OnBoardActivity" />
     </application>
 
 </manifest>

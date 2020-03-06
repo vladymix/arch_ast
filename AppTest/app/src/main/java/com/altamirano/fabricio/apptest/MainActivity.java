@@ -15,9 +15,10 @@ import com.altamirano.fabricio.apptest.activities.ListSwipeActivity;
 import com.altamirano.fabricio.apptest.activities.ListValidateActivity;
 import com.altamirano.fabricio.apptest.activities.OnBoardActivity;
 import com.altamirano.fabricio.apptest.activities.SquareBitmapActivity;
+import com.altamirano.fabricio.apptest.activities.dialogs.ColorPickerActivity;
 import com.altamirano.fabricio.apptest.adapters.MenuAdapter;
 import com.altamirano.fabricio.apptest.commons.MenuItem;
-import com.altamirano.fabricio.dialog.DialogPassword;
+import com.altamirano.fabricio.dialogs.DialogPassword;
 import com.altamirano.fabricio.libraryast.tools.DateTools;
 
 import java.text.ParseException;
@@ -28,7 +29,6 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     ListView listMenu;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +44,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         itms.add(new MenuItem(ExpandableBasicActivity.class, "Expandable basic", R.drawable.ic_arrow_downward));
         itms.add(new MenuItem(ListSwipeActivity.class, "Swipe List", R.drawable.ic_arrow_downward));
         itms.add(new MenuItem(ListValidateActivity.class, "Swipe List Validate", R.drawable.ic_arrow_downward));
+        itms.add(new MenuItem(ColorPickerActivity.class, "Color Picker", R.drawable.ic_on_board));
 
         this.listMenu.setAdapter(new MenuAdapter(this, itms));
         this.listMenu.setOnItemClickListener(this);
 
-        new DialogPassword(this,"1234", R.style.AppTheme_PopupOverlay).show();
+
     }
 
     @Override
