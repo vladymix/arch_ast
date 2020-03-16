@@ -10,9 +10,7 @@ import android.graphics.Point
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
-import android.os.Build
 import android.os.Bundle
-import android.support.annotation.RequiresApi
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -29,20 +27,15 @@ import com.altamirano.fabricio.libraryast.Utils.asyncTask
 import com.altamirano.fabricio.widgets.PositionLayer
 
 @SuppressLint("ValidFragment")
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-class ColorPickerDialog(var listener: ((ColorPicker?) -> Unit)? = null) : DialogFragment(),
+class ColorPickerDialog(private val ctx: Context, var listener: ((ColorPicker?) -> Unit)? = null) : DialogFragment(),
         View.OnTouchListener {
 
     private val FILE_CACHE = "picker_color_cache"
     private val LIST_CACHE = "temp_colors"
 
-    @SuppressLint("NewApi")
-    private fun getCurrentCtx():Context?{
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            this.context
-        } else {
-            return null
-        }
+
+    private fun getCurrentCtx():Context{
+        return ctx
     }
 
 
@@ -102,11 +95,11 @@ class ColorPickerDialog(var listener: ((ColorPicker?) -> Unit)? = null) : Dialog
 
         recicleView.layoutManager = GridLayoutManager(this.getCurrentCtx(), 5)
 
-        this.listTemp = ArrayList(this.getCurrentCtx()!!.getCacheColor())
+        this.listTemp = ArrayList(this.getCurrentCtx().getCacheColor())
 
         this.getCurrentCtx().let {
             recicleView.adapter =
-                    ColorTempAdapter(it!!.getCacheColor()) { this.onItemColorSelected(it) }
+                    ColorTempAdapter(it.getCacheColor()) { this.onItemColorSelected(it) }
         }
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
