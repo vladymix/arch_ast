@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">App Test</string>
+    <string name="title1">Wellcome</string>
+    <string name="description1">Bienvenido a App test, libreria para acelerar los desarrollos tanto en kotlin como en android</string>
+
+    <string name="title2">External media</string>
+    <string name="description2">Necesitamos permisos para poder almacenar tus datos</string>
 </resources>

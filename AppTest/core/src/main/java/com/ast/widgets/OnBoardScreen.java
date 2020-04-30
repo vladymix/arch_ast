@@ -16,8 +16,8 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.altamirano.fabricio.core.R;
-import com.altamirano.fabricio.core.onboard.OnBoardAdapter;
-import com.altamirano.fabricio.core.onboard.OnBoardItem;
+import com.altamirano.fabricio.core.commons.OnBoardItem;
+import com.altamirano.fabricio.core.adapters.OnBoardAdapter;
 
 import java.util.ArrayList;
 
@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class OnBoardScreen extends RelativeLayout {
 
     private LinearLayout pager_indicator;
+    private RelativeLayout ast_content;
     private ViewPager onboard_pager;
     private Button btn_get_started;
     // private OnBoardAdapter mAdapter;
@@ -55,6 +56,7 @@ public class OnBoardScreen extends RelativeLayout {
         onboard_pager = findViewById(R.id.pager_introduction);
         pager_indicator = findViewById(R.id.viewPagerCountDots);
         btn_get_started = findViewById(R.id.btn_get_started);
+        ast_content = findViewById(R.id.ast_content);
     }
 
 
@@ -105,6 +107,8 @@ public class OnBoardScreen extends RelativeLayout {
                 else if (pos == (dotsCount - 1) && previous_pos == dotsCount)
                     hide_animation();
 
+                ((OnBoardAdapter)mAdapter).deployColor(ast_content, position);
+
                 previous_pos = pos;
             }
 
@@ -113,6 +117,9 @@ public class OnBoardScreen extends RelativeLayout {
 
             }
         });
+
+        previous_pos = 1;
+        ((OnBoardAdapter)mAdapter).deployColor(ast_content, previous_pos-1);
     }
 
     private void configureDonuts() {
@@ -158,8 +165,6 @@ public class OnBoardScreen extends RelativeLayout {
             }
 
         });
-
-
     }
 
     public void hide_animation() {
@@ -180,12 +185,9 @@ public class OnBoardScreen extends RelativeLayout {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-
                 btn_get_started.clearAnimation();
                 btn_get_started.setVisibility(View.GONE);
-
             }
-
         });
 
 

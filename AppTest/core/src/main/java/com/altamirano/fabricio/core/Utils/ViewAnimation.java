@@ -2,6 +2,9 @@ package com.altamirano.fabricio.core.Utils;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
+import android.graphics.Color;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
@@ -137,5 +140,22 @@ public class ViewAnimation {
             }
         });
         view.startAnimation(expandAction);
+    }
+
+
+    public static void changeBackgroundColor(final View view, int color){
+        ValueAnimator animator = new ValueAnimator();
+        animator.setDuration(300);
+        animator.setEvaluator(new ArgbEvaluator());
+        animator.setIntValues(Color.WHITE, color);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                view.setBackgroundColor((int) animation.getAnimatedValue());
+            }
+        });
+
+        animator.start();
+
     }
 }

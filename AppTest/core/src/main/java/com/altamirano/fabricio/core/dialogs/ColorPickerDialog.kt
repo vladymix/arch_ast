@@ -29,7 +29,7 @@ import com.altamirano.fabricio.core.commons.PointCicle
 import com.ast.widgets.PositionLayer
 
 @SuppressLint("ValidFragment")
-class ColorPickerDialog(var listener: ((ColorPicker?) -> Unit)? = null) : DialogFragment(),
+class ColorPickerDialog(private var listener: ((ColorPicker?) -> Unit)? = null) : DialogFragment(),
     View.OnTouchListener {
 
     private var FILE_CACHE = "picker_color_cache"
@@ -305,7 +305,6 @@ class ColorPickerDialog(var listener: ((ColorPicker?) -> Unit)? = null) : Dialog
                     val pointLayer = PointCicle(x, y)
                     pointLayer.fixWith(imageView.height / 2.toFloat() - 38f, imageView.height / 2)
 
-
                     val bitmap = this.getBitmap(v)
                     val scale = bitmap.height / imageView.height.toFloat()
 
@@ -353,7 +352,7 @@ class ColorPickerDialog(var listener: ((ColorPicker?) -> Unit)? = null) : Dialog
             intArrayOf(Color.BLACK, color.getAsColor())
         )
         gp.cornerRadius = 50f
-        this.viewGradient.setBackgroundDrawable(gp)
+        this.viewGradient.setBackground(gp)
     }
 
     fun loadBitmapFromView(v: View): Bitmap {
