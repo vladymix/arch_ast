@@ -1,13 +1,3 @@
 <resources>
-    <string name="app_name">AppTest</string>
-    <string name="circle_image">Circle Image</string>
-
-    <string name="ob_header1">Wellcome</string>
-    <string name="ob_header2">Wellcome 2</string>
-    <string name="ob_header3">Wellcome 3</string>
-    <string name="ob_desc1">Summary</string>
-    <string name="ob_desc2">Summary 2</string>
-    <string name="ob_desc3">Summary 3</string>
-    <string name="title_activity_main2">Main2Activity</string>
-
+    <string name="app_name">App Test</string>
 </resources>
