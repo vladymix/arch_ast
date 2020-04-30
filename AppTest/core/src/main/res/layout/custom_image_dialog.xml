@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:paddingBottom="20dp"
+        android:padding="10dp"
+
+        android:background="@drawable/background_card_dialog"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dg_tittle"
+            android:text="Oh yeah! Mario time!"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="45dp"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/dg_message"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Navigate your world as Mario to celebrate Mario Day on 10 March"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/image_center"
+            android:visibility="visible"
+            android:layout_gravity="center"
+            android:layout_width="120dp"
+            android:layout_height="120dp" />
+
+        <TableLayout
+            android:stretchColumns="0,1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+            <TableRow>
+                <Button
+                    android:id="@+id/dg_btn_secundary"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:text="No Gracias"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+                <Button
+                    android:text="OK"
+                    android:id="@+id/dg_btn_primary"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/image_title"
+        android:visibility="visible"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="70dp"
+        android:layout_height="70dp" />
+
+</RelativeLayout>
