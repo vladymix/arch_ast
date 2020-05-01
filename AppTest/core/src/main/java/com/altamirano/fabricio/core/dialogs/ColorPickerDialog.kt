@@ -29,7 +29,7 @@ import com.altamirano.fabricio.core.commons.PointCicle
 import com.ast.widgets.PositionLayer
 
 @SuppressLint("ValidFragment")
-class ColorPickerDialog(private var listener: ((ColorPicker?) -> Unit)? = null) : DialogFragment(),
+class ColorPickerDialog() : DialogFragment(),
     View.OnTouchListener {
 
     private var FILE_CACHE = "picker_color_cache"
@@ -39,7 +39,7 @@ class ColorPickerDialog(private var listener: ((ColorPicker?) -> Unit)? = null) 
     private var bitmap: Bitmap? = null
 
     var colorInit: ColorPicker? = ColorPicker(255, 255, 255, 255)
-    private var colorSelected: ColorPicker = ColorPicker(0, 0, 0, 0)
+    private var colorSelected: ColorPicker = ColorPicker(255, 255, 255, 255)
 
     private lateinit var colortext: TextView
     private lateinit var viewGradient: ImageView
@@ -49,8 +49,7 @@ class ColorPickerDialog(private var listener: ((ColorPicker?) -> Unit)? = null) 
     private lateinit var imagePicker: ImageView
     private lateinit var progressIndicator: ProgressBar
     private lateinit var viewTarget: View
-
-
+    var onColorChangeListener: ((ColorPicker?) -> Unit)? = null
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
@@ -109,8 +108,17 @@ class ColorPickerDialog(private var listener: ((ColorPicker?) -> Unit)? = null) 
         tag?.let {
             this.FILE_CACHE = it
         }
-
         super.show(manager, tag)
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+
+        colorInit?.let {
+            colorSelected = it
+            serachAsyncColor(it)
+        }
     }
 
     private fun setValue(colorPicker: ColorPicker?) {
@@ -163,7 +171,7 @@ class ColorPickerDialog(private var listener: ((ColorPicker?) -> Unit)? = null) 
     }
 
 
-    fun findColor(colorPicker: ColorPicker): Point? {
+    private fun findColor(colorPicker: ColorPicker): Point? {
         var px = 0
         var py = 0
         val bitmap = getBitmap(this.imagePicker)
@@ -268,7 +276,7 @@ class ColorPickerDialog(private var listener: ((ColorPicker?) -> Unit)? = null) 
         this.listTemp.add(0, this.colorSelected)
 
         this.context?.saveCacheColor(this.listTemp)
-        listener?.invoke(this.colorSelected)
+        onColorChangeListener?.invoke(this.colorSelected)
         this.dismiss()
     }
 
@@ -355,7 +363,7 @@ class ColorPickerDialog(private var listener: ((ColorPicker?) -> Unit)? = null) 
         this.viewGradient.setBackground(gp)
     }
 
-    fun loadBitmapFromView(v: View): Bitmap {
+   private fun loadBitmapFromView(v: View): Bitmap {
         val b = Bitmap.createBitmap(
             v.layoutParams.width,
             v.layoutParams.height,
@@ -427,7 +435,7 @@ class ColorPickerDialog(private var listener: ((ColorPicker?) -> Unit)? = null) 
 
     }
 
-    fun colorToRestoreString(value: String?): ColorPicker {
+   private fun colorToRestoreString(value: String?): ColorPicker {
 
         if (value.isNullOrEmpty()) {
             return getDefaultColor()
@@ -438,7 +446,7 @@ class ColorPickerDialog(private var listener: ((ColorPicker?) -> Unit)? = null) 
     }
 
 
-    fun colorPickerToStoredString(color: ColorPicker): String {
+    private fun colorPickerToStoredString(color: ColorPicker): String {
         return "${color.alfa}|${color.red}|${color.green}|${color.blue}"
     }
 

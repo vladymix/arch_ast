@@ -3,6 +3,56 @@ Conjunto de artefactos para agilizar el desarrolo
 
 ![icon](https://github.com/vladymix/arch_ast/blob/master/AppTest/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
 
+
+DialogTools
+-------------
+
+![icon](https://github.com/vladymix/arch_ast/blob/master/recursos/dialogs.png)
+
+### Métodos 
+
+
+```groovy
+  val dialog = ColorPickerDialog()
+      dialog.colorInit = lastColor
+
+      dialog.onColorChangeListener = { color ->
+                color?.getAsColor()?.let {
+                    view.setBackgroundColor(it)
+                }
+                lastColor = color
+      }
+
+     dialog.show(supportFragmentManager, "cache")
+```
+
+```groovy
+   val dialog = PasswordDialog(this, "1234", R.style.AppThemePassword)
+
+      dialog.onResultDialogListener = object : DialogResultListener{
+                override fun onCorrectPassword(dialog: PasswordDialog, numberIntentsBefore: Int) {
+                }
+
+                override fun onErrorPassword(dialog: PasswordDialog, numberIntents: Int) {
+                    Toast.makeText(this@DialogsActivity,"Error password", Toast.LENGTH_SHORT).show()
+                }
+      }
+      dialog.show()
+```
+
+```groovy
+DialogTools  dialog  = new DialogTools().setTitle("Oh yeah! is time!")
+                        .setMessage("Add this dialog to facilitate your application, collaborate in github.com/vladymix")
+                        .setImageCenter(getResources().getDrawable(R.drawable.ic_circle_java))
+                        .setImageTitle(getResources().getDrawable(R.drawable.ic_android_studio))
+                        .setPrimaryButton("Ok", null)
+                        .setSecundaryButton("Cancel", null);
+
+             dialog.show(this.getFragmentManager(),"My customDialog");
+
+```
+
+
 DateTools
 -------------
 ### Métodos 
@@ -50,31 +100,25 @@ String encodeBitmapToBase64(Bitmap image)
 Bitmap decodeBase64ToBitmap(String inputBase64)
 
 ```
-
-DialogTools
--------------
-
-![icon](https://github.com/vladymix/arch_ast/blob/master/recursos/dialogtools.png)
-
-### Métodos 
-
-```groovy
-
-DialogTools  dialog  = new DialogTools().setTitle("Oh yeah! is time!")
-                        .setMessage("Add this dialog to facilitate your application, collaborate in github.com/vladymix")
-                        .setImageCenter(getResources().getDrawable(R.drawable.ic_circle_java))
-                        .setImageTitle(getResources().getDrawable(R.drawable.ic_android_studio))
-                        .setPrimaryButton("Ok", null)
-                        .setSecundaryButton("Cancel", null);
-
-             dialog.show(this.getFragmentManager(),"My customDialog");
-
-```
-
 OnBoardScreen
 -------------
 Pagina de bienvenida
 
+```groovy
+    <com.ast.widgets.OnBoardScreen
+        android:id="@+id/onBoardScreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+```
+
+```groovy
+        val list = ArrayList<OnBoardItem>()
+        list.add(OnBoardItem(R.drawable.ic_bubble_chart,R.string.title1,R.string.description1, R.color.mdtp_accent_color,
+            R.color.colorWhite))
+        list.add(OnBoardItem(R.drawable.ic_acces_media,R.string.title2,R.string.description1, R.color.light_blue_A700, R.color.mdtp_numbers_text_color))
+        this.onBoardScreen.setAdapterDefault(list)
+
+```
 
 ## Como añadir la dependecia a nuestro proyecto?
 -------------

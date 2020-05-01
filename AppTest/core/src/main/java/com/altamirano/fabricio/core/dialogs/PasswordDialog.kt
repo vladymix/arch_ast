@@ -1,9 +1,7 @@
 package com.altamirano.fabricio.core.dialogs
 
-import android.annotation.TargetApi
 import android.app.Dialog
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -13,14 +11,14 @@ import com.altamirano.fabricio.core.R
 import com.altamirano.fabricio.core.listeners.DialogResultListener
 
 //ic_launcher
-@TargetApi(Build.VERSION_CODES.LOLLIPOP)
-class DialogPassword(context: Context, private val password: String, theme: Int = android.R.style.ThemeOverlay) :
+
+class PasswordDialog(context: Context, private val password: String, theme: Int = android.R.style.Theme) :
         Dialog(context, theme) {
 
     private var input = ""
     private var intents = 0
 
-    var resultListener: DialogResultListener? = null
+    var onResultDialogListener: DialogResultListener? = null
 
     private lateinit var txt_mask: TextView
 
@@ -117,11 +115,11 @@ class DialogPassword(context: Context, private val password: String, theme: Int 
 
     private fun onCheckPassword() {
         if (this.input.equals(this.password)) {
-            resultListener?.onCorrectPassword(this, intents)
+            onResultDialogListener?.onCorrectPassword(this, intents)
             this.dismiss()
         } else {
             intents++
-            resultListener?.onErrorPassword(this, intents)
+            onResultDialogListener?.onErrorPassword(this, intents)
         }
     }
 
