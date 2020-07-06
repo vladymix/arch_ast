@@ -31,7 +31,7 @@ class DialogsActivity : AppCompatActivity() {
         }
 
         findViewById<View>(R.id.btnPassword).setOnClickListener {
-            val dialog = PasswordDialog(this, "1234", R.style.AppThemePassword)
+            val dialog = PasswordDialog( this,"1234", R.style.AppThemePassword)
 
             dialog.onResultDialogListener = object : DialogResultListener{
                 override fun onCorrectPassword(dialog: PasswordDialog, numberIntentsBefore: Int) {

@@ -5,5 +5,5 @@
 
     <size android:height="8dp" android:width="8dp"/>
 
-    <solid android:color="#2D9CDB"/>
+    <solid android:color="#9E9E9E"/>
 </shape>

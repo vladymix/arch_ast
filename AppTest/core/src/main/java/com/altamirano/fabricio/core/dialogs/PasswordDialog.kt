@@ -2,8 +2,12 @@ package com.altamirano.fabricio.core.dialogs
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -13,7 +17,7 @@ import com.altamirano.fabricio.core.listeners.DialogResultListener
 //ic_launcher
 
 class PasswordDialog(context: Context, private val password: String, theme: Int = android.R.style.Theme) :
-        Dialog(context, theme) {
+    Dialog(context, theme)  {
 
     private var input = ""
     private var intents = 0
@@ -25,6 +29,10 @@ class PasswordDialog(context: Context, private val password: String, theme: Int 
     init {
         this.setCancelable(false)
     }
+
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +57,7 @@ class PasswordDialog(context: Context, private val password: String, theme: Int 
 
         this.window?.getAttributes()?.windowAnimations = R.style.ASTDialogAnimation
 
-        /*   this.window?.let {
+         /*  this.window?.let {
                 val wlp = it.attributes
                 wlp?.gravity = Gravity.CENTER;
                 wlp?.flags = wlp.flags and WindowManager.LayoutParams.FLAG_BLUR_BEHIND.inv()
@@ -63,8 +71,8 @@ class PasswordDialog(context: Context, private val password: String, theme: Int 
 
             this.window?.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN)
             this.window?.addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND)
-            this.window?.setBackgroundDrawable(ColorDrawable(Color.WHITE))*/
-
+            this.window?.setBackgroundDrawable(ColorDrawable(Color.WHITE))
+*/
 
         (findViewById<ImageView>(R.id.ast_image)).setImageDrawable(this.context.packageManager.getApplicationIcon(this.context.applicationInfo))
         this.updateMask()
@@ -148,5 +156,4 @@ class PasswordDialog(context: Context, private val password: String, theme: Int 
 
         txt_mask.setText(inputMask)
     }
-
 }
