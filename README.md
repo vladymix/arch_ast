@@ -138,7 +138,7 @@ Despues añadimos la dependencia de la libreria
 
 ```groovy
 dependencies {
-	implementation 'com.github.vladymix:arch_ast:release_4.1'
+	implementation 'com.github.vladymix:arch_ast:release_4.2'
 }
 ```
 O, puedes descargar manualmente `aar` y colocar en tus proyectos en el directorio `libs`
