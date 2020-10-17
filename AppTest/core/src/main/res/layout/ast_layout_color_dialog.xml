@@ -75,26 +75,11 @@
         android:layout_below="@id/lyCurrentColor"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <com.ast.widgets.ColorCircleView
+            android:id="@+id/colorCircleView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <ImageView
-
-                android:id="@+id/imagePicker"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
-                android:layout_centerInParent="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_picker_image" />
-
-            <com.ast.widgets.PositionLayer
-                android:id="@+id/positionLayer"
-                android:layout_width="275dp"
-                android:layout_height="275dp"
-                android:layout_centerInParent="true" />
-        </RelativeLayout>
+            android:layout_gravity="center"/>
 
 
         <RelativeLayout
@@ -121,7 +106,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recicleView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_below="@id/contentTouch"
         android:layout_centerHorizontal="true"

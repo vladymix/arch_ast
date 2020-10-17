@@ -6,15 +6,16 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.altamirano.fabricio.core.dialogs.ColorPickerDialog
 import com.altamirano.fabricio.core.R
+import com.altamirano.fabricio.core.commons.ColorPicker
 import com.altamirano.fabricio.libraryast.tools.inflate
 import com.altamirano.fabricio.libraryast.tools.ternary
 
-class ColorTempAdapter(val list:List<ColorPickerDialog.ColorPicker>, val onItemClick:(ColorPickerDialog.ColorPicker?)->Unit):RecyclerView.Adapter<ColorTempAdapter.ColorTempHolder>() {
+class ColorTempAdapter(val list:List<ColorPicker>, val onItemClick:(ColorPicker?)->Unit):RecyclerView.Adapter<ColorTempAdapter.ColorTempHolder>() {
 
     inner class ColorTempHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val view = itemView.findViewById<ImageView>(R.id.viewColor)
 
-        fun bindValue(colorPicker: ColorPickerDialog.ColorPicker) {
+        fun bindValue(colorPicker: ColorPicker) {
 
             view.setOnClickListener{ onItemClick.invoke(colorPicker) }
             view.setColorFilter(colorPicker.getAsColor())

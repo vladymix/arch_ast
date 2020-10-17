@@ -4,14 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.altamirano.fabricio.core.commons.ColorPicker
 import com.altamirano.fabricio.core.dialogs.ColorPickerDialog
 import com.altamirano.fabricio.core.dialogs.PasswordDialog
 import com.altamirano.fabricio.core.listeners.DialogResultListener
 
 class DialogsActivity : AppCompatActivity() {
 
-    private var lastColor: ColorPickerDialog.ColorPicker? =
-        ColorPickerDialog.ColorPicker(225, 221, 49, 246)
+    private var lastColor: ColorPicker? = ColorPicker(225, 221, 49, 246)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
