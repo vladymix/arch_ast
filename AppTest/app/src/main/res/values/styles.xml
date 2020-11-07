@@ -27,7 +27,7 @@
 
     <style name="AstTheme" parent="AstBaseTheme">
         <!-- Customize your theme here. -->
-        <item name="colorAccent">#F31B1B</item>
+        <item name="colorAccent">#FC0028</item>
 
     </style>
 

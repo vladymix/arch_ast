@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.altamirano.fabricio.apptest.R
 import com.altamirano.fabricio.apptest.commons.ItemMenu
@@ -16,6 +17,7 @@ class ItemMenuAdapter(val list: List<ItemMenu>, val listener: (ItemMenu) -> Unit
         fun bind(itemMenu: ItemMenu) {
             this.textMenu.text = itemMenu.text
             this.imageMenu.setImageResource(itemMenu.idImage)
+            this.imageMenu.setColorFilter(ContextCompat.getColor(this.imageMenu.context, R.color.colorAccent))
             this.itemView.setOnClickListener {
                 listener.invoke(itemMenu)
             }

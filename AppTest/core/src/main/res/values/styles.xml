@@ -15,5 +15,6 @@
         <item name="colorPrimaryDark">@color/ast_background</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/ast_background</item>
     </style>
 </resources>
