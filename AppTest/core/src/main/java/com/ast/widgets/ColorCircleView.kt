@@ -16,7 +16,7 @@ class ColorCircleView(context: Context?, attrs: AttributeSet?) : View(context, a
     private val mRealImage: Bitmap = Bitmap.createScaledBitmap(
         BitmapFactory.decodeResource(
             resources,
-            R.drawable.ic_picker_image
+            R.drawable.ast_gamma_colors
         ), 350, 350, false
     )
     private val mPositionColor = PointF(0f, 0f)

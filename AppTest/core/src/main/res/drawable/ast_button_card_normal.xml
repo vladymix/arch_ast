@@ -3,7 +3,6 @@
     android:shape="rectangle"
     android:padding="10dp">
     <!-- you can use any color you want I used here gray color-->
-    <stroke android:color="@color/ast_background_card" android:width="2dp"/>
-    <corners android:radius="10dp"/>
-    <solid android:color="@color/ast_background_card"/>
+    <corners android:radius="20dp"/>
+    <solid android:color="@color/ast_button_normal"/>
 </shape>

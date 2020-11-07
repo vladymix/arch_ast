@@ -22,6 +22,12 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="AstTheme" parent="AstBaseTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorAccent">#F31B1B</item>
 
     </style>
 

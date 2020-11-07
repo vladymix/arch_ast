@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="ASTDialogAnimation">
-        <item name="android:windowEnterAnimation">@anim/slide_up_anim</item>
-        <item name="android:windowExitAnimation">@anim/slide_down_anim</item>
-    </style>
-
-    <style name="AstTheme" parent="AstBaseTheme">
-        <!-- Customize your theme here. -->
-    </style>
 
     <style name="AstBaseTheme" parent="Theme.AppCompat.DayNight">
         <!-- Customize your theme here. -->
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="colorPrimaryDark">@color/ast_background</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowNoTitle">true</item>

@@ -1,9 +1,11 @@
 package com.altamirano.fabricio.apptest
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.altamirano.fabricio.core.AstAboutActivity
 import com.altamirano.fabricio.core.commons.ColorPicker
 import com.altamirano.fabricio.core.dialogs.ColorPickerDialog
 import com.altamirano.fabricio.core.dialogs.PasswordDialog
@@ -16,6 +18,8 @@ class DialogsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dialogs)
+
+        findViewById<View>(R.id.btnAbout).setOnClickListener{this.onViewAbout()}
 
         findViewById<View>(R.id.btnDialogColor).setOnClickListener { view ->
             val dialog = ColorPickerDialog()
@@ -45,5 +49,9 @@ class DialogsActivity : AppCompatActivity() {
             }
             dialog.show()
         }
+    }
+
+    private fun onViewAbout() {
+        startActivity(Intent(this, AstAboutActivity::class.java))
     }
 }

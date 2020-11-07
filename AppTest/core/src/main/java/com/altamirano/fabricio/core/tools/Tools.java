@@ -59,4 +59,14 @@ public class Tools {
             window.setStatusBarColor(activity.getResources().getColor(color));
         }
     }
+
+    public static void changeColorBarValue(Activity activity, int color){
+        Window window = activity.getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setStatusBarColor(color);
+        }
+    }
 }

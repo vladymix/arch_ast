@@ -25,7 +25,7 @@ public class BaseDialog extends Dialog {
 
         this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
 
-        this.setContentView(R.layout.custom_image_dialog);
+        this.setContentView(R.layout.ast_dialog_image_header);
         this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 }

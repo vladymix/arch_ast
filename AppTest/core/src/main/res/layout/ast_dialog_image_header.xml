@@ -13,8 +13,7 @@
         android:layout_marginRight="6dp"
         android:paddingBottom="20dp"
         android:padding="10dp"
-
-        android:background="@drawable/background_card_dialog"
+        android:background="@drawable/ast_shape_card"
         android:orientation="vertical">
 
         <TextView
@@ -26,7 +25,7 @@
             android:layout_marginTop="45dp"
             android:gravity="center"
             android:textSize="22sp"
-            android:textColor="#000"
+            android:textColor="?android:textColorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -34,7 +33,7 @@
             android:id="@+id/dg_message"
             android:gravity="center"
             android:textAlignment="center"
-            android:textColor="#000"
+            android:textColor="?android:textColorPrimary"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="Navigate your world as Mario to celebrate Mario Day on 10 March"

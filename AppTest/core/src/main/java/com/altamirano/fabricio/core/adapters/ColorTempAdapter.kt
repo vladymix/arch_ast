@@ -22,7 +22,7 @@ class ColorTempAdapter(val list:List<ColorPicker>, val onItemClick:(ColorPicker?
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorTempHolder = ColorTempHolder(parent.inflate(R.layout.item_cache_color))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ColorTempHolder = ColorTempHolder(parent.inflate(R.layout.ast_item_cache_color))
 
     override fun getItemCount(): Int = (list.size > 10).ternary(10, list.size)
 

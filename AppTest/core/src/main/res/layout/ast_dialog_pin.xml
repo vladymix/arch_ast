@@ -19,7 +19,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginTop="12dp"
-            android:src="@drawable/non_selected_item_dot" />
+            android:src="@drawable/abc_vector_test" />
 
         <TextView
             android:layout_width="wrap_content"

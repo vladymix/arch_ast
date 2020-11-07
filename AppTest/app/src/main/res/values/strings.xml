@@ -5,4 +5,7 @@
 
     <string name="title2">External media</string>
     <string name="description2">Necesitamos permisos para poder almacenar tus datos</string>
+
+    <string name="ast_version">Versión</string>
+    <string name="ast_url_privacity">https://google.es</string>
 </resources>
