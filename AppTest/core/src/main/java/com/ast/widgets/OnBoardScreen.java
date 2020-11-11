@@ -106,9 +106,6 @@ public class OnBoardScreen extends RelativeLayout {
                     show_animation();
                 else if (pos == (dotsCount - 1) && previous_pos == dotsCount)
                     hide_animation();
-
-                ((OnBoardAdapter)mAdapter).deployColor(ast_content, position);
-
                 previous_pos = pos;
             }
 
@@ -119,7 +116,6 @@ public class OnBoardScreen extends RelativeLayout {
         });
 
         previous_pos = 1;
-        ((OnBoardAdapter)mAdapter).deployColor(ast_content, previous_pos-1);
     }
 
     private void configureDonuts() {

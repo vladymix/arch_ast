@@ -12,8 +12,9 @@ class BoardActivity : AppCompatActivity() {
         setContentView(R.layout.activity_board)
 
         val list = ArrayList<OnBoardItem>()
-        list.add(OnBoardItem(R.drawable.ic_bubble_chart,R.string.title1,R.string.description1, R.color.mdtp_accent_color, R.color.colorWhite))
-        list.add(OnBoardItem(R.drawable.ic_acces_media,R.string.title2,R.string.description1, R.color.light_blue_A700, R.color.mdtp_numbers_text_color))
+        list.add(OnBoardItem(R.drawable.board_files,R.string.title1,R.string.description1))
+        list.add(OnBoardItem(R.drawable.board_location,R.string.title2,R.string.description1))
+        list.add(OnBoardItem(R.drawable.board_dark_night, R.string.title2,R.string.description1))
         this.onBoardScreen.setAdapterDefault(list)
     }
 }

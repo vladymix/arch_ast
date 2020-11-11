@@ -46,18 +46,12 @@ public class OnBoardAdapter  extends PagerAdapter {
         View itemView = LayoutInflater.from(mContext).inflate(R.layout.on_board_item, container, false);
 
         OnBoardItem item = list.get(position);
-
         ImageView imageView = itemView.findViewById(R.id.iv_onboard);
         imageView.setImageResource(item.getImage());
-
         TextView tv_title=itemView.findViewById(R.id.tv_header);
         tv_title.setText(item.getIdTitle());
-        tv_title.setTextColor(ContextCompat.getColor(tv_title.getContext(), item.getIdTextColor()));
-
         TextView tv_content=itemView.findViewById(R.id.tv_desc);
         tv_content.setText(item.getIdDescription());
-        tv_content.setTextColor(ContextCompat.getColor(tv_content.getContext(), item.getIdTextColor()));
-
         container.addView(itemView);
 
         return itemView;
@@ -66,16 +60,5 @@ public class OnBoardAdapter  extends PagerAdapter {
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((RelativeLayout) object);
-    }
-
-    public void deployColor(RelativeLayout ast_content, int position) {
-        int color = list.get(position).getIdColor();
-        if(color>0){
-            ast_content.setBackgroundColor(ContextCompat.getColor(this.mContext, color));
-            Tools.changeColorBar((Activity) ast_content.getContext(), color);
-        }
-
-       // ViewAnimation.changeBackgroundColor(ast_content, ContextCompat.getColor(this.mContext, color));
-
     }
 }

@@ -12,10 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AstTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CodeActivity"></activity>
-        <activity
-            android:name=".BoardActivity"
-            android:theme="@style/AppThemeNoTitle" />
+        <activity android:name=".CodeActivity"/>
+        <activity android:name=".BoardActivity" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

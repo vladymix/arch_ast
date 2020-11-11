@@ -41,7 +41,5 @@
             android:src="@drawable/code_dialog_password"
             android:layout_width="match_parent"
             android:layout_height="130dp"/>
-
     </LinearLayout>
-
 </androidx.core.widget.NestedScrollView>

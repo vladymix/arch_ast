@@ -25,6 +25,7 @@
 
             <TextView
                 android:id="@+id/tv_header"
+                android:textColor="?android:textColorPrimary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -33,7 +34,6 @@
                 android:text="Find nearby stops"
                 android:textAllCaps="true"
                 android:textSize="22sp"/>
-
             <TextView
                 android:id="@+id/tv_desc"
                 android:layout_width="match_parent"
@@ -43,7 +43,6 @@
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
                 android:text="Puedes encontrar todas las paradas que esten cerca de ti con un solo click"
-
                 android:textSize="18sp"/>
         </LinearLayout>
 
