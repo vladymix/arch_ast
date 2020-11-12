@@ -17,7 +17,7 @@ class ColorCircleView(context: Context?, attrs: AttributeSet?) : View(context, a
         BitmapFactory.decodeResource(
             resources,
             R.drawable.ast_gamma_colors
-        ), 350, 350, false
+        ), 560, 560, false
     )
     private val mPositionColor = PointF(0f, 0f)
     private val mPointWhitePaint = Paint(Paint.ANTI_ALIAS_FLAG)
