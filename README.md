@@ -120,6 +120,26 @@ Pagina de bienvenida
 
 ```
 
+## Dialog 
+
+```groovy
+
+ AstDialog(this).apply {
+            this.setViewProgress(true)
+            this.setCancelable(false)
+            this.setMessage("Mensaje de pruebas")
+            this.setPositiveButton("Aceptar"
+            ) { dialog, which ->
+                Toast.makeText(this@MainActivity, "Hello", Toast.LENGTH_LONG).show()
+            }
+            this.setNegativeButton("Cancelar"
+            ) { dialog, which ->
+                Toast.makeText(this@MainActivity, "Hello", Toast.LENGTH_LONG).show()
+            }
+        }.show()
+
+```
+
 ## Como añadir la dependecia a nuestro proyecto?
 -------------
 
@@ -138,7 +158,7 @@ Despues añadimos la dependencia de la libreria
 
 ```groovy
 dependencies {
-	implementation 'com.github.vladymix:arch_ast:release_4.7'
+	implementation 'com.github.vladymix:arch_ast:release_4.8'
 }
 ```
 O, puedes descargar manualmente `aar` y colocar en tus proyectos en el directorio `libs`
