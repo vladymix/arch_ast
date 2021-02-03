@@ -94,7 +94,7 @@ class DialogBrowser : DialogFragment() {
     }
 
 
-    private fun loadMetaData(){
+   /* private fun loadMetaData(){
         if(url!=null){
             asyncTask(doInBackground = {
                 return@asyncTask   UrlTools.getUrlSource(url)
@@ -113,5 +113,5 @@ class DialogBrowser : DialogFragment() {
                 }
             })
         }
-    }
+    }*/
 }

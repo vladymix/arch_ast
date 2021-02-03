@@ -12,6 +12,7 @@ import com.altamirano.fabricio.core.dialogs.DialogLicence
 import kotlinx.android.synthetic.main.ast_activity_about.*
 
 class AstAboutActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ast_activity_about)

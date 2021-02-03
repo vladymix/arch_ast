@@ -222,11 +222,8 @@ abstract class SwipeToValidateAdapter(
             clickRegion = rect
             this.pos = pos
         }
-
     }
-
     interface UnderlayButtonClickListener {
         fun onClick(pos: Int)
     }
-
 }

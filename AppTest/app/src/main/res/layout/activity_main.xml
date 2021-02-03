@@ -23,6 +23,12 @@
         android:layout_margin="10dp"
         android:src="@drawable/ic_ast_icon" />
 
+    <Button
+        android:text="TxtButton"
+        android:visibility="gone"
+        android:id="@+id/btnTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"

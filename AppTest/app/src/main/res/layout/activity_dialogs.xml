@@ -25,4 +25,16 @@
         android:layout_height="wrap_content"
         android:text="About" />
 
+    <Button
+        android:id="@+id/btnDialogImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dialog message" />
+
+    <Button
+        android:id="@+id/btnDialogProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dialog Progress" />
+
 </LinearLayout>

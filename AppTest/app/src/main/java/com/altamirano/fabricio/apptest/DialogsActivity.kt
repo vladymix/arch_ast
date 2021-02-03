@@ -7,9 +7,11 @@ import android.view.View
 import android.widget.Toast
 import com.altamirano.fabricio.core.AstAboutActivity
 import com.altamirano.fabricio.core.commons.ColorPicker
+import com.altamirano.fabricio.core.dialogs.AstDialog
 import com.altamirano.fabricio.core.dialogs.ColorPickerDialog
 import com.altamirano.fabricio.core.dialogs.PasswordDialog
 import com.altamirano.fabricio.core.listeners.DialogResultListener
+import com.altamirano.fabricio.core.tools.DialogImage
 
 class DialogsActivity : AppCompatActivity() {
 
@@ -20,6 +22,8 @@ class DialogsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_dialogs)
 
         findViewById<View>(R.id.btnAbout).setOnClickListener{this.onViewAbout()}
+        findViewById<View>(R.id.btnDialogImage).setOnClickListener{this.onShowDialogImage()}
+        findViewById<View>(R.id.btnDialogProgress).setOnClickListener{this.onShowDialogProgress()}
 
         findViewById<View>(R.id.btnDialogColor).setOnClickListener { view ->
             val dialog = ColorPickerDialog()
@@ -49,6 +53,23 @@ class DialogsActivity : AppCompatActivity() {
             }
             dialog.show()
         }
+    }
+
+    private fun onShowDialogProgress() {
+       AstDialog(this).apply {
+           this.setMessage("Mensaje para prueba de cuadro de dialogo")
+           this.setTitle("¿Que deseas hacer?")
+           this.setPositiveButton("Nada")
+           this.setNegativeButton("Cancelar")
+           this.setViewProgress(true)
+       }.show()
+    }
+
+    private fun onShowDialogImage() {
+        AstDialog(this).apply {
+            this.setMessage("Mensaje para prueba de cuadro de dialogo")
+            this.setTitle("¿Que deseas hacer?")
+        }.show()
     }
 
     private fun onViewAbout() {
