@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ast_background">#202125</color>
+    <color name="ast_button_normal">#303135</color>
+    <color name="ast_background_card">#303135</color>
+</resources>

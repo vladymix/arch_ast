@@ -1,0 +1,6 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Ast_test" parent="AstBaseTheme">
+        <item name="colorAccent">#AA00FF</item>
+    </style>
+</resources>
