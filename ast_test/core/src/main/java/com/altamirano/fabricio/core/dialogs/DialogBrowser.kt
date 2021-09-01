@@ -1,14 +1,11 @@
 package com.altamirano.fabricio.core.dialogs
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Bundle
-import android.security.NetworkSecurityPolicy
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.TextView
@@ -16,10 +13,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.altamirano.fabricio.core.R
-import com.altamirano.fabricio.core.tools.Tools
-import com.altamirano.fabricio.core.tools.UrlTools
-import com.altamirano.fabricio.core.tools.asyncTask
-import kotlinx.android.synthetic.main.ast_browser.*
 
 /*
 dialog.arguments = Bundle().apply {
@@ -33,6 +26,8 @@ Boolean show_toolbar
 class DialogBrowser : DialogFragment() {
 
     private var webView:WebView?=null
+    private var astwrapurl:View?=null
+    private var progressIndicator:View?=null
     private var asttitle: TextView?=null
     private var url:String?=null
 
@@ -49,6 +44,9 @@ class DialogBrowser : DialogFragment() {
         webView = view.findViewById(R.id.ast_webView)
         asttitle = view.findViewById(R.id.asttitleweb)
         webView?.webViewClient = CustomCliente()
+
+        astwrapurl = view.findViewById(R.id.astwrapurl)
+        progressIndicator = view.findViewById(R.id.progressIndicator)
 
         return view
     }
@@ -68,9 +66,9 @@ class DialogBrowser : DialogFragment() {
 
         arguments?.getBoolean("show_toolbar")?.let {
             if(it){
-                astwrapurl.visibility = View.VISIBLE
+                astwrapurl?.visibility = View.VISIBLE
             }else{
-                astwrapurl.visibility = View.GONE
+                astwrapurl?.visibility = View.GONE
             }
         }
     }

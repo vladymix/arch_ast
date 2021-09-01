@@ -9,6 +9,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        AstDialog(this).show()
+        val dialog = AstDialog(this)
+        dialog.setMessage("Dialogo de prueba")
+        dialog.setTitle("Titulo")
+        dialog.show()
     }
 }

@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19322916666666667" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.14947916666666666" />
         <entry key="core/src/main/res/drawable/dr.xml" value="0.209375" />
         <entry key="core/src/main/res/font/d.xml" value="0.2234375" />
         <entry key="core/src/main/res/layout/m.xml" value="0.19322916666666667" />
