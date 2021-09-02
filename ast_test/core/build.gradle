@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdk 16
         targetSdk 30
-        versionCode 51
-        versionName "5.1"
+        versionCode 52
+        versionName '5.2'
     }
 
     buildTypes {
@@ -21,16 +21,12 @@ android {
         }
     }
 
-     lintOptions {
-        abortOnError false
-    }
-
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = '1.8'
     }
 }
 

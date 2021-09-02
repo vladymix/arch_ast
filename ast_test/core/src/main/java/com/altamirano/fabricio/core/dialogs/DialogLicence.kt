@@ -32,9 +32,8 @@ class DialogLicence : DialogFragment() {
         return view
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         arguments?.getString("open_url")?.let {
 
         }

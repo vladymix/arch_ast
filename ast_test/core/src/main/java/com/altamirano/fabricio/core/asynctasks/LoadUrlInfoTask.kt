@@ -1,9 +1,9 @@
 package com.altamirano.fabricio.core.asynctasks
 
-import android.os.AsyncTask
 import android.util.Log
 import com.altamirano.fabricio.core.commons.InfoUrl
 import com.altamirano.fabricio.core.listeners.UrlResponse
+import com.altamirano.fabricio.core.tools.CoreAsyncTask
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.URL
@@ -11,10 +11,9 @@ import java.net.URL
 /**
  * @autor Created by Fabricio Altamirano on 27/3/18.
  */
-class LoadUrlInfoTask(private var url: String?, private val listener: UrlResponse?) :
-    AsyncTask<Void, Void?, InfoUrl?>() {
+class LoadUrlInfoTask(private var url: String?, private val listener: UrlResponse?) : CoreAsyncTask<Void, Void?, InfoUrl?>() {
 
-    protected override fun doInBackground(vararg voids: Void): InfoUrl? {
+    override fun doInBackground(vararg params: Void): InfoUrl? {
         val infoUrl = InfoUrl()
         try {
             if (url != null && url!!.length > 4) {
@@ -27,7 +26,6 @@ class LoadUrlInfoTask(private var url: String?, private val listener: UrlRespons
             val url = URL(url)
             val `in` = BufferedReader(InputStreamReader(url.openStream()))
             var inputLine: String
-            val urlIco = ""
             var index: Int
             var our: Int
             while (`in`.readLine().also { inputLine = it } != null) {
@@ -54,10 +52,11 @@ class LoadUrlInfoTask(private var url: String?, private val listener: UrlRespons
         return infoUrl
     }
 
-    override fun onPostExecute(s: InfoUrl?) {
-        super.onPostExecute(s)
-        if (listener != null) {
-            listener.result(s)
-        }
+    override fun onPostExecute(result: InfoUrl?) {
+        listener?.result(result)
+    }
+
+    override fun onPreExecute() {
+
     }
 }

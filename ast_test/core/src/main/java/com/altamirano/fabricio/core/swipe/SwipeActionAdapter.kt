@@ -20,16 +20,18 @@ class SwipeActionAdapter(baseAdapter: BaseAdapter) : DecoratorAdapter(baseAdapte
     private var mNormalSwipeFraction = 0.25f
     protected var mBackgroundResIds = HashMap<SwipeDirection, Int>()
     override fun getView(position: Int, convertView: View, parent: ViewGroup): View {
-        var output = convertView as SwipeViewGroup
-        if (output == null) {
-            output = SwipeViewGroup(parent.context)
-            for ((key, value) in mBackgroundResIds) {
-                output.addBackground(View.inflate(parent.context, value, null), key)
-            }
-            output.setSwipeTouchListener(mTouchListener)
 
-            output.contentView = super.getView(position, output.contentView!!, output)
+        if (convertView is SwipeViewGroup)
+            return convertView
+
+        val output = SwipeViewGroup(parent.context)
+        for ((key, value) in mBackgroundResIds) {
+            output.addBackground(View.inflate(parent.context, value, null), key)
         }
+        output.setSwipeTouchListener(mTouchListener)
+
+        output.contentView = super.getView(position, output.contentView!!, output)
+
 
         return output
     }

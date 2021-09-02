@@ -4,11 +4,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.altamirano.fabricio.core.dialogs.ColorPickerDialog
 import com.altamirano.fabricio.core.R
 import com.altamirano.fabricio.core.commons.ColorPicker
-import com.altamirano.fabricio.libraryast.tools.inflate
-import com.altamirano.fabricio.libraryast.tools.ternary
+import com.altamirano.fabricio.core.tools.inflate
+import com.altamirano.fabricio.core.tools.ternary
 
 class ColorTempAdapter(val list:List<ColorPicker>, val onItemClick:(ColorPicker?)->Unit):RecyclerView.Adapter<ColorTempAdapter.ColorTempHolder>() {
 

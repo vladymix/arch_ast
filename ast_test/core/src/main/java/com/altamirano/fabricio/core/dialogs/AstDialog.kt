@@ -10,7 +10,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.StringRes
 import com.altamirano.fabricio.core.R
-import com.altamirano.fabricio.libraryast.tools.ternary
+import com.altamirano.fabricio.core.tools.ternary
 
 class AstDialog(context: Context) : Dialog(context), DialogInterface {
 

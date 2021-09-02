@@ -52,10 +52,10 @@ class DialogBrowser : DialogFragment() {
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         webView?.settings?.javaScriptEnabled = true
-        webView?.settings?.setAppCacheEnabled(true)
+       // webView?.settings?.setAppCacheEnabled(false)
         webView?.settings?.javaScriptCanOpenWindowsAutomatically = true
 
         arguments?.getString("open_url")?.let {
@@ -72,7 +72,6 @@ class DialogBrowser : DialogFragment() {
             }
         }
     }
-
 
     fun showFull(supportFragmentManager: FragmentManager) {
         val transaction = supportFragmentManager.beginTransaction()

@@ -93,7 +93,7 @@ class ColorPickerDialog() : DialogFragment() {
 
         recicleView.layoutManager = GridLayoutManager(this.context, 5)
 
-        this.listTemp = ArrayList(this.context!!.getCacheColor())
+        this.listTemp = ArrayList(view.context.getCacheColor())
 
         this.context?.let {
             recicleView.adapter =

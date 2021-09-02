@@ -39,8 +39,8 @@ object ImageTools {
      * @return Bitmap circle
      */
     fun getCircleBitmap(source: Bitmap?): Bitmap {
-        var width = 0
-        var height = 0
+        val width: Int
+        val height: Int
         val bitmap = getSquareBitmap(source)
         val minSize = Math.min(bitmap!!.width, bitmap.height)
         height = minSize

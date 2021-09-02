@@ -1,41 +1,35 @@
 package com.altamirano.fabricio.core.tools
 
-import android.os.AsyncTask
+import android.os.Handler
+import android.os.Looper
+import java.util.concurrent.Executors
 
-class TaskService<T>(val pre: (() -> Unit)?, val background: () -> T?, val post: ((T?) -> Unit)?) :
-        AsyncTask<Void, Void, T?>() {
+class TaskRunner{
+    private val executor = Executors.newSingleThreadExecutor()
+    private val handler = Handler(Looper.getMainLooper())
 
-    override fun onPostExecute(result: T?) {
-        post?.invoke(result)
-    }
-
-    override fun onPreExecute() {
-        pre?.invoke()
-    }
-
-    override fun doInBackground(vararg params: Void?): T? {
-        return background.invoke()
+    fun <T> executeAsync(preExecute: (() -> Unit)?, doInBackground: () -> T?, postExecute: ((T?) -> Unit)? ){
+        executor.execute {
+            preExecute?.let {
+                handler.post(preExecute)
+            }
+           val result= doInBackground.invoke()
+            handler.post {
+                postExecute?.invoke(result)
+            }
+        }
     }
 }
 
-
 fun <T> asyncTask(preExecute: () -> Unit, doInBackground: () -> T?, postExecute: (T?) -> Unit ){
-    TaskService(
-        preExecute,
-        doInBackground,
-        postExecute
-    ).execute()
+    TaskRunner().executeAsync(preExecute,doInBackground, postExecute)
 }
 
 fun <T> asyncTask(doInBackground: () -> T?, postExecute: (T?) -> Unit ){
-    TaskService(
-        null,
-        doInBackground,
-        postExecute
-    ).execute()
+    TaskRunner().executeAsync(null,doInBackground, postExecute)
 }
 
 
 fun <T> asyncTask(doInBackground: () -> T?){
-    TaskService(null, doInBackground, null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
+    TaskRunner().executeAsync(null,doInBackground, null)
 }

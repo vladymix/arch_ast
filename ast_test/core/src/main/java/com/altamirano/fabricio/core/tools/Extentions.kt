@@ -1,4 +1,4 @@
-package com.altamirano.fabricio.libraryast.tools
+package com.altamirano.fabricio.core.tools
 
 import android.content.Context
 import android.view.LayoutInflater

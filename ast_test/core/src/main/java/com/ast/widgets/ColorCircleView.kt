@@ -226,7 +226,7 @@ class ColorCircleView(context: Context?, attrs: AttributeSet?) : View(context, a
     var pendingLoadStarColor = false
 
     private fun searchColor(colorPicker: Int) {
-        val start = System.currentTimeMillis()
+
         mRealImage.let {
 
             point = null
