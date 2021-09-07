@@ -22,17 +22,18 @@ class SwipeActionAdapter(baseAdapter: BaseAdapter) : DecoratorAdapter(baseAdapte
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
-       if( convertView !=null && convertView is SwipeViewGroup){
-           return convertView
+        val output :SwipeViewGroup
+       if(convertView == null) {
+           output = SwipeViewGroup(parent.context)
+           for ((key, value) in mBackgroundResIds) {
+               output.addBackground(View.inflate(parent.context, value, null), key)
+           }
+           output.setSwipeTouchListener(mTouchListener)
+       }else{
+           output = convertView as SwipeViewGroup
        }
 
-        val output = SwipeViewGroup(parent.context)
-        for ((key, value) in mBackgroundResIds) {
-            output.addBackground(View.inflate(parent.context, value, null), key)
-        }
-        output.setSwipeTouchListener(mTouchListener)
-
-        output.contentView = super.getView(position, output.contentView!!, output)
+        output.setContentView(super.getView(position, output.contentView, output))
 
 
         return output

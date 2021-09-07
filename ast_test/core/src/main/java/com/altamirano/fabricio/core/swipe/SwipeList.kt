@@ -9,9 +9,9 @@ import com.altamirano.fabricio.core.swipe.SwipeActionAdapter.SwipeActionListener
 class SwipeList : ListView {
     private var mAdapter: SwipeActionAdapter? = null
 
-    constructor(context: Context?) : super(context) {}
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {}
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
+    constructor(context: Context) : super(context) {}
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {}
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
         defStyleAttr
@@ -22,11 +22,13 @@ class SwipeList : ListView {
         mAdapter!!.setSwipeActionListener(listener)
     }
 
-    fun setAdapter(adaper: BaseAdapter): SwipeActionAdapter? {
+    fun setAdapter(adaper: BaseAdapter): SwipeActionAdapter {
         mAdapter = SwipeActionAdapter(adaper)
-        mAdapter!!.setListView(this)
-        super.setAdapter(mAdapter)
-        return mAdapter
+        mAdapter?.let {
+            it.setListView(this)
+            super.setAdapter(it)
+        }
+        return mAdapter!!
     }
 
     fun addBackground(key: SwipeDirection, resId: Int): SwipeActionAdapter? {
