@@ -35,8 +35,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
+    <com.altamirano.fabricio.core.swipe.SwipeList
+        android:id="@+id/swipeList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/header"

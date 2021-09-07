@@ -10,7 +10,7 @@ open class DecoratorAdapter(val adapter: BaseAdapter) : BaseAdapter() {
         return adapter.count
     }
 
-    override fun getView(position: Int, convertView: View, parent: ViewGroup): View {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         return adapter.getView(position, convertView, parent)
     }
 
