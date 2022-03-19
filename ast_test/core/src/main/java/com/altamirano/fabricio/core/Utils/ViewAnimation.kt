@@ -15,12 +15,25 @@ object ViewAnimation {
     @JvmOverloads
     fun fadeOut(view: View, animListener: AnimListener? = null) {
         view.alpha = 1.0f
+        view.visibility = View.VISIBLE
         view.animate().setDuration(500).setListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animator: Animator) {
                 animListener?.onFinish()
                 super.onAnimationEnd(animator)
             }
         }).alpha(0f)
+    }
+
+    @JvmOverloads
+    fun fadeIn(view: View, animListener: AnimListener? = null) {
+        view.alpha = 0.0f
+        view.visibility = View.VISIBLE
+        view.animate().setDuration(500).setListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animator: Animator) {
+                animListener?.onFinish()
+                super.onAnimationEnd(animator)
+            }
+        }).alpha(1.0f)
     }
 
     fun expand(view: View) {
@@ -75,19 +88,6 @@ object ViewAnimation {
                 .toLong()
         //view.startAnimation(c08313);
         return c08313
-    }
-
-    @JvmOverloads
-    fun fadeIn(view: View, animListener: AnimListener? = null) {
-        view.visibility = View.GONE
-        view.alpha = 0.0f
-        view.animate().setDuration(200).setListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animator: Animator) {
-                view.visibility = View.VISIBLE
-                animListener?.onFinish()
-                super.onAnimationEnd(animator)
-            }
-        }).alpha(1.0f)
     }
 
     fun showIn(view: View) {

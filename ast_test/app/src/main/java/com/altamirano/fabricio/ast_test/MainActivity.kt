@@ -3,15 +3,17 @@ package com.altamirano.fabricio.ast_test
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ListView
 import com.altamirano.fabricio.ast_test.adapter.SimpleListAdapter
+import com.altamirano.fabricio.core.Utils.ViewAnimation
 import com.altamirano.fabricio.core.swipe.SwipeActionAdapter
 import com.altamirano.fabricio.core.swipe.SwipeDirection
 import com.altamirano.fabricio.core.swipe.SwipeList
 
 class MainActivity : AppCompatActivity() {
     lateinit var swipeList:SwipeList
-
+    private  var isShow = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,6 +39,15 @@ class MainActivity : AppCompatActivity() {
             add("Fabricio")
 
         }))
+
+        findViewById<View>(R.id.astTitle).setOnClickListener {
+            if(isShow){
+                this.hide()
+            }else{
+                this.show()
+            }
+            isShow = !isShow
+        }
 
         this.swipeList.addBackground(SwipeDirection.DIRECTION_NORMAL_RIGHT, R.layout.row_nr_right)!!
             .addBackground(SwipeDirection.DIRECTION_FAR_RIGHT, R.layout.row_bg_right)
@@ -89,5 +100,13 @@ class MainActivity : AppCompatActivity() {
         })
 
 
+    }
+
+    private fun show() {
+        ViewAnimation.fadeIn(findViewById(R.id.header))
+    }
+
+    private fun hide() {
+        ViewAnimation.fadeOut(findViewById(R.id.header))
     }
 }
