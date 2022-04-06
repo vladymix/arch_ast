@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ListView
 import com.altamirano.fabricio.ast_test.adapter.SimpleListAdapter
 import com.altamirano.fabricio.core.Utils.ViewAnimation
+import com.altamirano.fabricio.core.analytics.VAnalytics
 import com.altamirano.fabricio.core.swipe.SwipeActionAdapter
 import com.altamirano.fabricio.core.swipe.SwipeDirection
 import com.altamirano.fabricio.core.swipe.SwipeList
@@ -14,8 +15,12 @@ import com.altamirano.fabricio.core.swipe.SwipeList
 class MainActivity : AppCompatActivity() {
     lateinit var swipeList:SwipeList
     private  var isShow = true
+    lateinit var vAnalytics:VAnalytics
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        vAnalytics =   VAnalytics.getInstance(this)
+        vAnalytics.enableCrashes(true)
+        vAnalytics.putEvent(VAnalytics.TypeEVENT.SCREEN, this.localClassName)
         setContentView(R.layout.activity_main)
         swipeList = findViewById(R.id.swipeList)
         swipeList.setAdapter(SimpleListAdapter(this, 0, ArrayList<String>().apply {
@@ -47,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                 this.show()
             }
             isShow = !isShow
+            vAnalytics.putEvent(VAnalytics.TypeEVENT.TOUCH,"setOnClickListener")
         }
 
         this.swipeList.addBackground(SwipeDirection.DIRECTION_NORMAL_RIGHT, R.layout.row_nr_right)!!
