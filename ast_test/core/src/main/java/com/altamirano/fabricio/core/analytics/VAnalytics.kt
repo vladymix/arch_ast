@@ -205,12 +205,14 @@ class VAnalytics(val context: Context) {
             }
 
             val responseCode: Int = conn.responseCode
-            if (responseCode == HttpsURLConnection.HTTP_OK && type != "PUT") {
-                var line: String?
+            if (responseCode == HttpsURLConnection.HTTP_OK) {
+              /* No need read response
+               var line: String?
                 val br = BufferedReader(InputStreamReader(conn.getInputStream()))
                 while (br.readLine().also { line = it } != null) {
                     response += line
                 }
+                */
             } else {
                 response = ""
             }
