@@ -37,11 +37,11 @@ class VAnalytics(val context: Context) {
 
     init {
         packageName = context.packageName
+
         try {
             val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
             versionName = pInfo.versionName
             versionCode = pInfo.versionCode
-
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
@@ -51,7 +51,7 @@ class VAnalytics(val context: Context) {
             if (sendCrasesh) {
                 saveFile(paramThrowable)
             } else
-                exitProcess(2)
+                exitProcess(0)
         }
         sendPendingFiles()
     }
@@ -90,7 +90,7 @@ class VAnalytics(val context: Context) {
         } catch (e: IOException) {
             Log.e("Exception", "File write failed: $e")
         } finally {
-            exitProcess(-1)
+            exitProcess(0)
         }
     }
 
@@ -157,8 +157,6 @@ class VAnalytics(val context: Context) {
                 )
             } catch (ex: Exception) {
                 ex.printStackTrace()
-            } finally {
-
             }
         }
     }
@@ -194,25 +192,6 @@ class VAnalytics(val context: Context) {
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
-    }
-
-    fun putEvent(type: TypeEVENT, name: String) {
-        events.add(AnalyticsEvent(packageName, type.toString(), name, false))
-        asyncTask {
-            events.forEach {
-                sendEvent(it)
-            }
-        }
-    }
-
-    fun enableCrashes(isEnableCrash: Boolean) {
-        this.sendCrasesh = isEnableCrash
-    }
-
-    fun sendException(paramThrowable: Throwable){
-        val message = "Error recoverable ${paramThrowable.message}"
-        val params = Log.getStackTraceString(paramThrowable)
-        sendDataException(message, params)
     }
 
     private fun getInfoDevice(): String {
@@ -283,6 +262,25 @@ class VAnalytics(val context: Context) {
             e.printStackTrace()
         }
         return response
+    }
+
+    fun putEvent(type: TypeEVENT, name: String) {
+        events.add(AnalyticsEvent(packageName, type.toString(), name, false))
+        asyncTask {
+            for (item in events){
+                sendEvent(item)
+            }
+        }
+    }
+
+    fun enableCrashes(isEnableCrash: Boolean) {
+        this.sendCrasesh = isEnableCrash
+    }
+
+    fun sendException(paramThrowable: Throwable){
+        val message = "Error recoverable ${paramThrowable.message}"
+        val params = Log.getStackTraceString(paramThrowable)
+        sendDataException(message, params)
     }
 
     enum class TypeEVENT {
