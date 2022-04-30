@@ -9,10 +9,14 @@ import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.net.ssl.HttpsURLConnection
+import kotlin.collections.ArrayList
+import kotlin.system.exitProcess
 
 class VAnalytics(val context: Context) {
-    private val events= ArrayList<AnalyticsEvent>()
+    private val events = ArrayList<AnalyticsEvent>()
     private var sendCrasesh: Boolean = false
     var userName: String = ""
     private var versionName: String = "not_found"
@@ -44,25 +48,86 @@ class VAnalytics(val context: Context) {
 
         Thread.setDefaultUncaughtExceptionHandler { _, paramThrowable ->
             paramThrowable.printStackTrace()
-            if (sendCrasesh)
-                sendException(paramThrowable)
+            if (sendCrasesh) {
+                saveFile(paramThrowable)
+            } else
+                exitProcess(2)
+        }
+        sendPendingFiles()
+    }
+
+    private fun saveFile(paramThrowable: Throwable) {
+        val message = paramThrowable.message ?: "Error not caught"
+        val params = Log.getStackTraceString(paramThrowable)
+        writeToFile("$message|$params")
+    }
+
+    private fun sendPendingFiles() {
+        context.filesDir.listFiles()?.forEach {
+            try {
+                if (it.name.contains("error_")) {
+                    val data = readFromFile(it.name).split("|")
+                    sendDataException(data[0], data[1])
+                    it.delete()
+                }
+            } catch (ex: java.lang.Exception) {
+                ex.printStackTrace()
+            }
 
         }
     }
 
-    private fun sendException(paramThrowable: Throwable) {
+    private fun writeToFile(data: String) {
+        try {
+            val fileName = "error_" + SimpleDateFormat(
+                "dd_MM_yyyy_HH_mm:ss",
+                Locale.getDefault()
+            ).format(Date())
+            val outputStreamWriter =
+                OutputStreamWriter(context.openFileOutput(fileName, Context.MODE_PRIVATE))
+            outputStreamWriter.write(data)
+            outputStreamWriter.close()
+        } catch (e: IOException) {
+            Log.e("Exception", "File write failed: $e")
+        } finally {
+            exitProcess(-1)
+        }
+    }
+
+    private fun readFromFile(filename: String): String {
+        var ret = ""
+        try {
+            val inputStream: InputStream? = context.openFileInput(filename)
+            if (inputStream != null) {
+                val inputStreamReader = InputStreamReader(inputStream)
+                val bufferedReader = BufferedReader(inputStreamReader)
+                var receiveString: String? = ""
+                val stringBuilder = java.lang.StringBuilder()
+                while (bufferedReader.readLine().also { receiveString = it } != null) {
+                    stringBuilder.append("\n").append(receiveString)
+                }
+                inputStream.close()
+                ret = stringBuilder.toString()
+            }
+        } catch (e: FileNotFoundException) {
+            Log.e("login activity", "File not found: $e")
+        } catch (e: IOException) {
+            Log.e("login activity", "Can not read file: $e")
+        }
+        return ret
+    }
+
+    private fun sendDataException(message: String, params: String) {
         asyncTask {
             try {
-                val message = paramThrowable.message ?: "Error not caught"
-                val params = Log.getStackTraceString(paramThrowable)
-
                 val sk = URLEncoder.encode(params, "UTF-8")
+                val mess = URLEncoder.encode(message, "UTF-8")
                 val device = URLEncoder.encode(getInfoDevice(), "UTF-8")
 
                 val jsonBulder = StringBuilder()
                 jsonBulder.append("{")
                 jsonBulder.append("\"type\":")
-                jsonBulder.append("\"$message\"")
+                jsonBulder.append("\"$mess\"")
 
                 jsonBulder.append(",")
 
@@ -87,30 +152,20 @@ class VAnalytics(val context: Context) {
                 jsonBulder.append("}")
 
                 performPostCall(
-                    "https://apiservice.vladymix.es/exceptions/api/logger",
+                    "https://apiservice.vladymix.es/exceptions/api/crashException",
                     jsonBulder
                 )
             } catch (ex: Exception) {
                 ex.printStackTrace()
             } finally {
-                System.exit(0)
+
             }
         }
     }
 
-    fun putEvent(type: TypeEVENT, name:String){
-        events.add(AnalyticsEvent(packageName,type.toString(),name, false))
-        asyncTask {
-            events.forEach {
-                sendEvent(it)
-            }
-        }
-    }
-
-    private fun sendEvent(item:AnalyticsEvent)
-    {
+    private fun sendEvent(item: AnalyticsEvent) {
         try {
-            if(item.isSending){
+            if (item.isSending) {
                 return
             }
             item.isSending = true
@@ -133,7 +188,7 @@ class VAnalytics(val context: Context) {
             jsonBulder.append("}")
 
             performPostCall(
-                "https://apiservice.vladymix.es/exceptions/api/putEvent",
+                "https://apiservice.vladymix.es/analitycs/putEvent",
                 jsonBulder, "PUT"
             )
         } catch (ex: Exception) {
@@ -141,8 +196,23 @@ class VAnalytics(val context: Context) {
         }
     }
 
+    fun putEvent(type: TypeEVENT, name: String) {
+        events.add(AnalyticsEvent(packageName, type.toString(), name, false))
+        asyncTask {
+            events.forEach {
+                sendEvent(it)
+            }
+        }
+    }
+
     fun enableCrashes(isEnableCrash: Boolean) {
         this.sendCrasesh = isEnableCrash
+    }
+
+    fun sendException(paramThrowable: Throwable){
+        val message = "Error recoverable ${paramThrowable.message}"
+        val params = Log.getStackTraceString(paramThrowable)
+        sendDataException(message, params)
     }
 
     private fun getInfoDevice(): String {
@@ -166,13 +236,12 @@ class VAnalytics(val context: Context) {
                 "\nTIME : " + Build.TIME +
                 "\nTYPE : " + Build.TYPE +
                 "\nUNKNOWN : " + Build.UNKNOWN +
-                "\nUSER : " + Build.USER
+                "\nUSER : " + userName
         return info
     }
 
-
     private fun performPostCall(
-        requestURL: String?,jsonBulder:StringBuilder, type:String = "POST"
+        requestURL: String?, jsonBulder: StringBuilder, type: String = "POST"
     ): String? {
         val url: URL
         var response: String? = ""
@@ -183,13 +252,13 @@ class VAnalytics(val context: Context) {
             conn.connectTimeout = 15000
             conn.requestMethod = type
 
-            if(type== "PUT"){
+            if (type == "PUT") {
                 conn.doOutput = true
-               val outPut =  OutputStreamWriter(conn.outputStream)
+                val outPut = OutputStreamWriter(conn.outputStream)
                 outPut.write(jsonBulder.toString())
                 outPut.close()
 
-            }else{
+            } else {
                 conn.doInput = true
                 conn.doOutput = true
 
@@ -206,13 +275,7 @@ class VAnalytics(val context: Context) {
 
             val responseCode: Int = conn.responseCode
             if (responseCode == HttpsURLConnection.HTTP_OK) {
-              /* No need read response
-               var line: String?
-                val br = BufferedReader(InputStreamReader(conn.getInputStream()))
-                while (br.readLine().also { line = it } != null) {
-                    response += line
-                }
-                */
+
             } else {
                 response = ""
             }
@@ -222,7 +285,19 @@ class VAnalytics(val context: Context) {
         return response
     }
 
-    enum class TypeEVENT{
-        SCREEN, TOUCH, LOAD,LOCATION_ID,ITEMS,CONTENT,SEARCH_TERM,SHIPPING,DESTINATION,ORIGIN
+    enum class TypeEVENT {
+        SCREEN,
+        TOUCH,
+        LOAD,
+        NO_LOAD,
+        LOCATION_ID,
+        ITEMS,
+        CONTENT,
+        SEARCH_TERM,
+        SHIPPING,
+        DESTINATION,
+        ORIGIN
     }
+
+
 }

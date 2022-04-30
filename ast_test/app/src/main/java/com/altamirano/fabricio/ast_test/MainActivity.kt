@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                 this.show()
             }
             isShow = !isShow
+            "d9".toInt()
             vAnalytics.putEvent(VAnalytics.TypeEVENT.TOUCH,"setOnClickListener")
         }
 
