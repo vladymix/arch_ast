@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Build
 import android.util.Log
 import com.altamirano.fabricio.core.tools.asyncTask
+import org.json.JSONObject
 import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
@@ -54,6 +55,23 @@ class VAnalytics(val context: Context) {
                 exitProcess(0)
         }
         sendPendingFiles()
+    }
+
+    fun getVersion(mPackage:String, listener:(updateVersion:String,lastUpdate:String)->Unit){
+        asyncTask(doInBackground = {
+              val json = JSONObject()
+            json.put("typeOS","android")
+            json.put("package",mPackage)
+            performPostCallResponse("https://apiservice.vladymix.es/analitycs/versionApp", json.toString())
+        }, postExecute = {
+            if(it==null)
+                listener.invoke("","")
+
+            it?.let {
+               val json= JSONObject(it)
+                listener.invoke(json.getString("updateVersion"),json.getString("lastUpdate"))
+            }
+        })
     }
 
     private fun saveFile(paramThrowable: Throwable) {
@@ -297,5 +315,53 @@ class VAnalytics(val context: Context) {
         ORIGIN
     }
 
+    private fun performPostCallResponse(
+        requestURL: String?, json: String, type: String = "POST"
+    ): String? {
+        val url: URL
+        var response: String? = ""
+        try {
+            url = URL(requestURL)
+            val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
+            conn.readTimeout = 15000
+            conn.connectTimeout = 15000
+            conn.requestMethod = type
+
+            if (type == "PUT") {
+                conn.doOutput = true
+                val outPut = OutputStreamWriter(conn.outputStream)
+                outPut.write(json)
+                outPut.close()
+
+            } else {
+                conn.doInput = true
+                conn.doOutput = true
+
+                val os: OutputStream = conn.outputStream
+                val writer = BufferedWriter(
+                    OutputStreamWriter(os, "UTF-8")
+                )
+
+                writer.write(json)
+                writer.flush()
+                writer.close()
+                os.close()
+            }
+
+            val responseCode: Int = conn.responseCode
+            if (responseCode == HttpsURLConnection.HTTP_OK) {
+             val br =    BufferedReader(InputStreamReader(conn.inputStream))
+                var line:String? = ""
+                while ((br.readLine().also { line = it }) != null) {
+                    response+=line;
+                }
+            } else {
+                response = ""
+            }
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+        return response
+    }
 
 }

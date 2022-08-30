@@ -52,8 +52,12 @@ class MainActivity : AppCompatActivity() {
                 this.show()
             }
             isShow = !isShow
-            "d9".toInt()
+
             vAnalytics.putEvent(VAnalytics.TypeEVENT.TOUCH,"setOnClickListener")
+
+            vAnalytics.getVersion("com.developer"){ v,l->
+                Log.i("Ho","Version :$v lastUpdate : $l")
+            }
         }
 
         this.swipeList.addBackground(SwipeDirection.DIRECTION_NORMAL_RIGHT, R.layout.row_nr_right)!!
