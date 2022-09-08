@@ -27,4 +27,9 @@ Custom views\n
     <string name="ast_lb_information">Información de la aplicación</string>
     <string name="ast_lb_policy">Política de privacidad</string>
     <string name="ast_lab_licences">Licencias de código abierto</string>
+
+    <string name="ast_msg_new_version">Hay una nueva versión disponible desea actualizar ahora?</string>
+    <string name="ast_msg_title_update">Actualizar</string>
+    <string name="ast_btn_accept">Aceptar</string>
+    <string name="ast_btn_cancel">Cancelar</string>
 </resources>

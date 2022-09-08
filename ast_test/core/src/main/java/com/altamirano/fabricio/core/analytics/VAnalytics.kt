@@ -1,9 +1,15 @@
 package com.altamirano.fabricio.core.analytics
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.util.Log
+import androidx.core.content.contentValuesOf
+import com.altamirano.fabricio.core.R
+import com.altamirano.fabricio.core.dialogs.AstDialog
 import com.altamirano.fabricio.core.tools.asyncTask
 import org.json.JSONObject
 import java.io.*
@@ -57,15 +63,62 @@ class VAnalytics(val context: Context) {
         sendPendingFiles()
     }
 
+    fun autoNeedUpdate(context: Context, currentVersion:String){
+        getVersion(packageName){ version, _ ->
+            showDialogVersion(context,version, currentVersion, packageName)
+        }
+    }
+
+    private fun showDialogVersion(context: Context,version: String, currentVersion:String,mPackage:String) {
+        try {
+            val lastVersion = version.replace(".", "").toInt()
+            val versionName = currentVersion.replace(".", "").toInt()
+            if (lastVersion > versionName) {
+                val dialog = AstDialog(context)
+                dialog.setTitle(context.getString(R.string.ast_msg_title_update))
+                dialog.setMessage(context.getString(R.string.ast_msg_new_version))
+                dialog.setPositiveButton(context.getString(R.string.ast_btn_accept)) { d, _ ->
+                    gotoStore(context,mPackage)
+                    d.dismiss()
+                }
+
+                dialog.setNegativeButton(context.getString(R.string.ast_btn_cancel)) { d, _ ->
+                    d.dismiss()
+                }
+                dialog.show()
+            }
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
+    }
+
+    private fun gotoStore(context: Context,appPackageName: String) {
+        try {
+            context.startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("market://details?id=$appPackageName")
+                )
+            )
+        } catch (anfe: ActivityNotFoundException) {
+            context.startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
+                )
+            )
+        }
+    }
+
     fun getVersion(mPackage:String, listener:(updateVersion:String,lastUpdate:String)->Unit){
         asyncTask(doInBackground = {
               val json = JSONObject()
             json.put("typeOS","android")
-            json.put("package",mPackage)
+            json.put("package", mPackage)
             performPostCallResponse("https://apiservice.vladymix.es/analitycs/versionApp", json.toString())
         }, postExecute = {
-            if(it==null)
-                listener.invoke("","")
+            if(it.isNullOrEmpty())
+                listener.invoke("1","")
 
             it?.let {
                val json= JSONObject(it)
