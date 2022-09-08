@@ -71,6 +71,7 @@ class VAnalytics(val context: Context) {
 
     private fun showDialogVersion(context: Context,version: String, currentVersion:String,mPackage:String) {
         try {
+            Log.i("VAnalytics","Version compare current version: $currentVersion with service version: $version")
             val lastVersion = version.replace(".", "").toInt()
             val versionName = currentVersion.replace(".", "").toInt()
             if (lastVersion > versionName) {
@@ -117,6 +118,8 @@ class VAnalytics(val context: Context) {
             json.put("package", mPackage)
             performPostCallResponse("https://apiservice.vladymix.es/analitycs/versionApp", json.toString())
         }, postExecute = {
+
+            Log.i("VAnalytics","Version response $it")
             if(it.isNullOrEmpty())
                 listener.invoke("1","")
 
