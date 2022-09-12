@@ -41,9 +41,11 @@ class VAnalytics(val context: Context) {
             return instance!!
         }
     }
+    var mOldHandler: Thread.UncaughtExceptionHandler?=null
 
     init {
         packageName = context.packageName
+        mOldHandler = Thread.getDefaultUncaughtExceptionHandler()
 
         try {
             val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
@@ -53,12 +55,16 @@ class VAnalytics(val context: Context) {
             ex.printStackTrace()
         }
 
-        Thread.setDefaultUncaughtExceptionHandler { _, paramThrowable ->
+        Thread.setDefaultUncaughtExceptionHandler { t, paramThrowable ->
             paramThrowable.printStackTrace()
             if (sendCrasesh) {
                 saveFile(paramThrowable)
-            } else
-                exitProcess(0)
+            }
+
+            if(mOldHandler==null){
+                t.stop()
+            }
+            mOldHandler?.uncaughtException(t, paramThrowable)
         }
         sendPendingFiles()
     }
@@ -164,7 +170,7 @@ class VAnalytics(val context: Context) {
         } catch (e: IOException) {
             Log.e("Exception", "File write failed: $e")
         } finally {
-            exitProcess(0)
+
         }
     }
 

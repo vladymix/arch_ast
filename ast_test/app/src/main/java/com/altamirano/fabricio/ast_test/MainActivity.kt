@@ -109,8 +109,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-
-
     }
 
     private fun show() {
