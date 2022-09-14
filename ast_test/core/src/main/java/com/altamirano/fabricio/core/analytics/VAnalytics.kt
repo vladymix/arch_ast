@@ -7,7 +7,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.util.Log
-import androidx.core.content.contentValuesOf
 import com.altamirano.fabricio.core.R
 import com.altamirano.fabricio.core.dialogs.AstDialog
 import com.altamirano.fabricio.core.tools.asyncTask
@@ -20,9 +19,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.net.ssl.HttpsURLConnection
 import kotlin.collections.ArrayList
-import kotlin.system.exitProcess
 
-class VAnalytics(val context: Context) {
+class VAnalytics private constructor(val context: Context) {
     private val events = ArrayList<AnalyticsEvent>()
     private var sendCrasesh: Boolean = false
     var userName: String = ""
@@ -41,7 +39,8 @@ class VAnalytics(val context: Context) {
             return instance!!
         }
     }
-    var mOldHandler: Thread.UncaughtExceptionHandler?=null
+
+    var mOldHandler: Thread.UncaughtExceptionHandler? = null
 
     init {
         packageName = context.packageName
@@ -61,7 +60,7 @@ class VAnalytics(val context: Context) {
                 saveFile(paramThrowable)
             }
 
-            if(mOldHandler==null){
+            if (mOldHandler == null) {
                 t.stop()
             }
             mOldHandler?.uncaughtException(t, paramThrowable)
@@ -69,15 +68,23 @@ class VAnalytics(val context: Context) {
         sendPendingFiles()
     }
 
-    fun autoNeedUpdate(context: Context, currentVersion:String){
-        getVersion(packageName){ version, _ ->
-            showDialogVersion(context,version, currentVersion, packageName)
+    fun autoNeedUpdate(context: Context, currentVersion: String) {
+        getVersion(packageName) { version, _ ->
+            showDialogVersion(context, version, currentVersion, packageName)
         }
     }
 
-    private fun showDialogVersion(context: Context,version: String, currentVersion:String,mPackage:String) {
+    private fun showDialogVersion(
+        context: Context,
+        version: String,
+        currentVersion: String,
+        mPackage: String
+    ) {
         try {
-            Log.i("VAnalytics","Version compare current version: $currentVersion with service version: $version")
+            Log.i(
+                "VAnalytics",
+                "Version compare current version: $currentVersion with service version: $version"
+            )
             val lastVersion = version.replace(".", "").toInt()
             val versionName = currentVersion.replace(".", "").toInt()
             if (lastVersion > versionName) {
@@ -85,7 +92,7 @@ class VAnalytics(val context: Context) {
                 dialog.setTitle(context.getString(R.string.ast_msg_title_update))
                 dialog.setMessage(context.getString(R.string.ast_msg_new_version))
                 dialog.setPositiveButton(context.getString(R.string.ast_btn_accept)) { d, _ ->
-                    gotoStore(context,mPackage)
+                    gotoStore(context, mPackage)
                     d.dismiss()
                 }
 
@@ -99,7 +106,7 @@ class VAnalytics(val context: Context) {
         }
     }
 
-    private fun gotoStore(context: Context,appPackageName: String) {
+    private fun gotoStore(context: Context, appPackageName: String) {
         try {
             context.startActivity(
                 Intent(
@@ -117,23 +124,47 @@ class VAnalytics(val context: Context) {
         }
     }
 
-    fun getVersion(mPackage:String, listener:(updateVersion:String,lastUpdate:String)->Unit){
+    fun getVersion(
+        mPackage: String,
+        listener: (updateVersion: String, lastUpdate: String) -> Unit
+    ) {
         asyncTask(doInBackground = {
-              val json = JSONObject()
-            json.put("typeOS","android")
+            val json = JSONObject()
+            json.put("typeOS", "android")
             json.put("package", mPackage)
-            performPostCallResponse("https://apiservice.vladymix.es/analitycs/versionApp", json.toString())
+            performPostCallResponse(
+                "https://apiservice.vladymix.es/analitycs/versionApp",
+                json.toString()
+            )
         }, postExecute = {
-
-            Log.i("VAnalytics","Version response $it")
-            if(it.isNullOrEmpty())
-                listener.invoke("1","")
-
-            it?.let {
-               val json= JSONObject(it)
-                listener.invoke(json.getString("updateVersion"),json.getString("lastUpdate"))
+            Log.i("VAnalytics", "Version response $it")
+            this.parseJsonVersion(it) { updateVersion, lastUpdate ->
+                listener.invoke(updateVersion, lastUpdate)
             }
         })
+    }
+
+    private fun parseJsonVersion(
+        response: String?,
+        listener: (updateVersion: String, lastUpdate: String) -> Unit
+    ) {
+
+        try {
+            if (response.isNullOrEmpty()) {
+                listener.invoke("1", "")
+            } else {
+                val json = JSONObject(response)
+                listener.invoke(json.getString("updateVersion"), json.getString("lastUpdate"))
+            }
+
+        } catch (ex: Exception) {
+            sendException(
+                java.lang.Exception(
+                    "Error to updateVersion response: $response with error: ${ex.message}",
+                    ex
+                )
+            )
+        }
     }
 
     private fun saveFile(paramThrowable: Throwable) {
@@ -347,7 +378,7 @@ class VAnalytics(val context: Context) {
     fun putEvent(type: TypeEVENT, name: String) {
         events.add(AnalyticsEvent(packageName, type.toString(), name, false))
         asyncTask {
-            for (item in events){
+            for (item in events) {
                 sendEvent(item)
             }
         }
@@ -357,7 +388,7 @@ class VAnalytics(val context: Context) {
         this.sendCrasesh = isEnableCrash
     }
 
-    fun sendException(paramThrowable: Throwable){
+    fun sendException(paramThrowable: Throwable) {
         val message = "Error recoverable ${paramThrowable.message}"
         val params = Log.getStackTraceString(paramThrowable)
         sendDataException(message, params)
@@ -412,10 +443,10 @@ class VAnalytics(val context: Context) {
 
             val responseCode: Int = conn.responseCode
             if (responseCode == HttpsURLConnection.HTTP_OK) {
-             val br =    BufferedReader(InputStreamReader(conn.inputStream))
-                var line:String? = ""
+                val br = BufferedReader(InputStreamReader(conn.inputStream))
+                var line: String? = ""
                 while ((br.readLine().also { line = it }) != null) {
-                    response+=line;
+                    response += line;
                 }
             } else {
                 response = ""
