@@ -41,7 +41,7 @@ class OnBoardAdapter(private val mContext: Context, items: ArrayList<OnBoardItem
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        container.removeView(`object` as RelativeLayout)
+        container.removeView(`object` as View)
     }
 
     init {

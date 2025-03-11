@@ -27,7 +27,6 @@ import java.util.ArrayList;
 public class OnBoardScreen extends RelativeLayout {
 
     private LinearLayout pager_indicator;
-    private RelativeLayout ast_content;
     private ViewPager onboard_pager;
     private Button btn_get_started;
     // private OnBoardAdapter mAdapter;
@@ -56,7 +55,6 @@ public class OnBoardScreen extends RelativeLayout {
         onboard_pager = findViewById(R.id.pager_introduction);
         pager_indicator = findViewById(R.id.viewPagerCountDots);
         btn_get_started = findViewById(R.id.btn_get_started);
-        ast_content = findViewById(R.id.ast_content);
     }
 
 
@@ -182,7 +180,7 @@ public class OnBoardScreen extends RelativeLayout {
             @Override
             public void onAnimationEnd(Animation animation) {
                 btn_get_started.clearAnimation();
-                btn_get_started.setVisibility(View.GONE);
+                btn_get_started.setVisibility(View.INVISIBLE);
             }
         });
 

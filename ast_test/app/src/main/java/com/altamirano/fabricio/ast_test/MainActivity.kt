@@ -1,11 +1,13 @@
 package com.altamirano.fabricio.ast_test
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ListView
 import com.altamirano.fabricio.ast_test.adapter.SimpleListAdapter
+import com.altamirano.fabricio.ast_test.ui.OnBoardActivity
 import com.altamirano.fabricio.core.Utils.ViewAnimation
 import com.altamirano.fabricio.core.analytics.VAnalytics
 import com.altamirano.fabricio.core.swipe.SwipeActionAdapter
@@ -22,6 +24,10 @@ class MainActivity : AppCompatActivity() {
         vAnalytics.enableCrashes(true)
         vAnalytics.putEvent(VAnalytics.TypeEVENT.SCREEN, this.localClassName)
         setContentView(R.layout.activity_main)
+
+        findViewById<View>(R.id.header).setOnClickListener {
+        startActivity(Intent(this, OnBoardActivity::class.java))
+        }
         swipeList = findViewById(R.id.swipeList)
         swipeList.setAdapter(SimpleListAdapter(this, 0, ArrayList<String>().apply {
             add("Hola")
