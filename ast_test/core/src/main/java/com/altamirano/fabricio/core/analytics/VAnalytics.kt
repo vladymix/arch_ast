@@ -379,8 +379,9 @@ class VAnalytics private constructor(val context: Context) {
     @Synchronized
     fun putEvent(type: TypeEVENT, name: String) {
         events.add(AnalyticsEvent(packageName, type.toString(), name, false))
+        val copyOfList = ArrayList(events) // Crea una copia segura para hilos
         asyncTask {
-            for (item in events) {
+            copyOfList.forEach { item ->
                 sendEvent(item)
             }
         }

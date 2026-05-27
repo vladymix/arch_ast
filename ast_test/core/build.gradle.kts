@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
+    id("maven-publish")
 }
 
 android {
@@ -12,8 +13,6 @@ android {
 
     defaultConfig {
         minSdk = 21
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
 
@@ -29,6 +28,22 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+    publishing {
+        singleVariant("release") // Prepara el componente 'release'
+    }
+
+    afterEvaluate {
+        publishing {
+            publications {
+                register<MavenPublication>("jitpack") {
+                    from(components["release"])
+                    groupId = "com.github.vladymix"
+                    artifactId = "core"
+                    version = "6.3"
+                }
+            }
+        }
     }
 }
 
