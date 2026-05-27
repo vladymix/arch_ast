@@ -18,7 +18,7 @@ class PositionLayer(context: Context, attrs: AttributeSet?) : View(context, attr
         // this.setOnTouchListener(this)
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         try {
             circleDrawPoint.drawIn(canvas)

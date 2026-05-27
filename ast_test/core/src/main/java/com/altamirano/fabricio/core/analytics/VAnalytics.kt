@@ -48,7 +48,7 @@ class VAnalytics private constructor(val context: Context) {
 
         try {
             val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-            versionName = pInfo.versionName
+            versionName = pInfo.versionName.orEmpty()
             versionCode = pInfo.versionCode
         } catch (ex: Exception) {
             ex.printStackTrace()
@@ -272,6 +272,7 @@ class VAnalytics private constructor(val context: Context) {
         }
     }
 
+    @Synchronized
     private fun sendEvent(item: AnalyticsEvent) {
         try {
             if (item.isSending) {
@@ -375,6 +376,7 @@ class VAnalytics private constructor(val context: Context) {
         return response
     }
 
+    @Synchronized
     fun putEvent(type: TypeEVENT, name: String) {
         events.add(AnalyticsEvent(packageName, type.toString(), name, false))
         asyncTask {
