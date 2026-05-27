@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Ast_test" parent="AstBaseTheme">
-        <item name="colorAccent">#AA00FF</item>
+    <style name="Base.Theme.Ast_test" parent="Theme.AppCompat.DayNight">
+        <!-- Customize your dark theme here. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
 </resources>

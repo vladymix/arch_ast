@@ -42,9 +42,9 @@ class ColorCircleView(context: Context?, attrs: AttributeSet?) : View(context, a
         mPointColor.color = Color.WHITE
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         radiusImage = width / 2 - mRadiusColor
-        canvas?.let {
+        canvas.let {
             drawImage(it)
             drawPoint(it)
         }
