@@ -40,7 +40,7 @@ android {
                     from(components["release"])
                     groupId = "com.github.vladymix"
                     artifactId = "core"
-                    version = "6.3"
+                    version = "6.4"
                 }
             }
         }
