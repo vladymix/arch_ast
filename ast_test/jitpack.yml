@@ -1,2 +1,5 @@
 jdk:
   - openjdk17
+# Forzamos a Jitpack a ejecutar la tarea de publicación de Gradle directamente
+install:
+  - ./gradlew :core:publishJitpackPublicationToMavenLocal
