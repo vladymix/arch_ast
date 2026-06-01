@@ -387,6 +387,8 @@ class VAnalytics private constructor(val context: Context) {
         }
     }
 
+
+
     fun enableCrashes(isEnableCrash: Boolean) {
         this.sendCrasesh = isEnableCrash
     }
@@ -408,7 +410,15 @@ class VAnalytics private constructor(val context: Context) {
         SEARCH_TERM,
         SHIPPING,
         DESTINATION,
-        ORIGIN
+        ORIGIN,
+        ERROR,
+        ADS_ERROR,
+        ADS_REQUEST,
+        ADS_LOADING,
+        ADS_SHOWED,
+        ADS_END,
+        ADS_CLOSE,
+        ADS_CLICK
     }
 
     private fun performPostCallResponse(
