@@ -69,6 +69,7 @@ class VAnalytics private constructor(val context: Context) {
     }
 
     fun autoNeedUpdate(context: Context, currentVersion: String) {
+        sendVersionUsed()
         getVersion(packageName) { version, _ ->
             showDialogVersion(context, version, currentVersion, packageName)
         }
@@ -412,10 +413,14 @@ class VAnalytics private constructor(val context: Context) {
         DESTINATION,
         ORIGIN,
         ERROR,
-        ADS_ERROR,
-        ADS_REQUEST,
-        ADS_LOADING,
+        ADS_CONSENT,
+        ADS_LOAD,
+        ADS_LOADED,
+        ADS_NO_LOAD,
         ADS_SHOWED,
+        ADS_NO_SHOWED,
+        ADS_FAILED,
+        ADS_REQUEST,
         ADS_END,
         ADS_CLOSE,
         ADS_CLICK
@@ -468,6 +473,25 @@ class VAnalytics private constructor(val context: Context) {
             e.printStackTrace()
         }
         return response
+    }
+
+    fun sendVersionUsed() {
+        asyncTask {
+            try {
+                val urlEncode = "https://apiservice.vladymix.es/analitycs/versionLoad/data?package=${packageName}&sdk=${Build.VERSION.SDK_INT}&version=$versionName"
+                val url = URL(urlEncode)
+                val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
+                conn.readTimeout = 1500
+                conn.connectTimeout = 1500
+                conn.requestMethod = "GET"
+                val responseCode: Int = conn.responseCode
+                if (responseCode == HttpsURLConnection.HTTP_OK){
+                    Log.i("App","Send data successful")
+                }
+            }catch (ex: Exception){
+                ex.printStackTrace()
+            }
+        }
     }
 
 }
