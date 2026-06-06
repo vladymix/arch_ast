@@ -11,11 +11,11 @@ class AstActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        VAnalytics.getInstance(this).sendVersionUsed()
-        AstDialog(this).apply {
+        VAnalytics.getInstance(this).autoNeedUpdate(this,"1.0")
+/*        AstDialog(this).apply {
             this.setTitle("Hola")
             this.setMessage("Como estas")
-        }.show()
+        }.show()*/
 
     }
 }

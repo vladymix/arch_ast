@@ -7,6 +7,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import com.altamirano.fabricio.core.R
 import com.altamirano.fabricio.core.dialogs.AstDialog
 import com.altamirano.fabricio.core.tools.asyncTask
@@ -89,18 +90,20 @@ class VAnalytics private constructor(val context: Context) {
             val lastVersion = version.replace(".", "").toInt()
             val versionName = currentVersion.replace(".", "").toInt()
             if (lastVersion > versionName) {
-                val dialog = AstDialog(context)
-                dialog.setTitle(context.getString(R.string.ast_msg_title_update))
-                dialog.setMessage(context.getString(R.string.ast_msg_new_version))
-                dialog.setPositiveButton(context.getString(R.string.ast_btn_accept)) { d, _ ->
-                    gotoStore(context, mPackage)
-                    d.dismiss()
-                }
+                AlertDialog.Builder(context).apply {
+                    setTitle(context.getString(R.string.ast_msg_title_update))
+                    setMessage(context.getString(R.string.ast_msg_new_version))
+                    setPositiveButton(context.getString(R.string.ast_btn_accept)) { d, _ ->
+                        gotoStore(context, mPackage)
+                        d.dismiss()
+                    }
+                    setNegativeButton(context.getString(R.string.ast_btn_cancel)) { d, _ ->
+                        d.dismiss()
+                    }
+                    setCancelable(false)
+                    show()
 
-                dialog.setNegativeButton(context.getString(R.string.ast_btn_cancel)) { d, _ ->
-                    d.dismiss()
                 }
-                dialog.show()
             }
         } catch (ex: Exception) {
             ex.printStackTrace()
