@@ -10,6 +10,7 @@ import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import com.altamirano.fabricio.core.R
 import com.altamirano.fabricio.core.dialogs.AstDialog
+import com.altamirano.fabricio.core.dialogs.AstDialogUpdate
 import com.altamirano.fabricio.core.tools.asyncTask
 import org.json.JSONObject
 import java.io.*
@@ -69,10 +70,18 @@ class VAnalytics private constructor(val context: Context) {
         sendPendingFiles()
     }
 
+    /**
+     * Verifica si la aplicación necesita una actualización automática.
+     *
+     * @param context El contexto de la aplicación o actividad necesario para acceder a recursos o SharedPreferences.
+     * @param currentVersion La versión actual de la app instalada (por ejemplo, "1.2.3").
+     * @param cancelable Indica si el usuario puede omitir o cerrar la alerta de actualización. Por defecto es `false`.
+     * Para cambiar de color los botones sobre escribir el color <color name="ast_color_accent">#E91E63</color>
+     */
     fun autoNeedUpdate(context: Context, currentVersion: String) {
         sendVersionUsed()
-        getVersion(packageName) { version, _ ->
-            showDialogVersion(context, version, currentVersion, packageName)
+        getVersion(packageName) { updateVersion, lastUpdate, summary, isMandatory  ->
+            showDialogVersion(context, updateVersion, currentVersion, summary, isMandatory, packageName)
         }
     }
 
@@ -80,6 +89,8 @@ class VAnalytics private constructor(val context: Context) {
         context: Context,
         version: String,
         currentVersion: String,
+        summary: String?,
+        isMandatory: Boolean,
         mPackage: String
     ) {
         try {
@@ -90,20 +101,34 @@ class VAnalytics private constructor(val context: Context) {
             val lastVersion = version.replace(".", "").toInt()
             val versionName = currentVersion.replace(".", "").toInt()
             if (lastVersion > versionName) {
-                AlertDialog.Builder(context).apply {
-                    setTitle(context.getString(R.string.ast_msg_title_update))
-                    setMessage(context.getString(R.string.ast_msg_new_version))
-                    setPositiveButton(context.getString(R.string.ast_btn_accept)) { d, _ ->
-                        gotoStore(context, mPackage)
-                        d.dismiss()
-                    }
-                    setNegativeButton(context.getString(R.string.ast_btn_cancel)) { d, _ ->
-                        d.dismiss()
-                    }
-                    setCancelable(false)
-                    show()
 
+                val dialog = AstDialogUpdate(context)
+                dialog.setCancelable(!isMandatory)
+                dialog.setData(context.getString(R.string.ast_msg_title_update), summary?:context.getString(R.string.ast_msg_new_version), version)
+                dialog.setPositiveButton(context.getString(R.string.ast_btn_accept)) { d, _ ->
+                    gotoStore(context, mPackage)
+                    d.dismiss()
                 }
+
+                dialog.setNegativeButton(context.getString(R.string.ast_btn_cancel)) { d, _ ->
+                    d.dismiss()
+                }
+                dialog.show()
+
+                /* AlertDialog.Builder(context).apply {
+                     setTitle(context.getString(R.string.ast_msg_title_update))
+                     setMessage(context.getString(R.string.ast_msg_new_version))
+                     setPositiveButton(context.getString(R.string.ast_btn_accept)) { d, _ ->
+                         gotoStore(context, mPackage)
+                         d.dismiss()
+                     }
+                     setNegativeButton(context.getString(R.string.ast_btn_cancel)) { d, _ ->
+                         d.dismiss()
+                     }
+                     setCancelable(false)
+                     show()
+
+                 }*/
             }
         } catch (ex: Exception) {
             ex.printStackTrace()
@@ -130,7 +155,7 @@ class VAnalytics private constructor(val context: Context) {
 
     fun getVersion(
         mPackage: String,
-        listener: (updateVersion: String, lastUpdate: String) -> Unit
+        listener: (updateVersion: String, lastUpdate: String, summary: String?, isMandatory: Boolean) -> Unit
     ) {
         asyncTask(doInBackground = {
             val json = JSONObject()
@@ -142,23 +167,34 @@ class VAnalytics private constructor(val context: Context) {
             )
         }, postExecute = {
             Log.i("VAnalytics", "Version response $it")
-            this.parseJsonVersion(it) { updateVersion, lastUpdate ->
-                listener.invoke(updateVersion, lastUpdate)
+            this.parseJsonVersion(it) { updateVersion, lastUpdate, summary, isMandatory ->
+                listener.invoke(
+                    updateVersion,
+                    lastUpdate, summary, isMandatory
+                )
             }
         })
     }
 
     private fun parseJsonVersion(
         response: String?,
-        listener: (updateVersion: String, lastUpdate: String) -> Unit
+        listener: (updateVersion: String, lastUpdate: String, summary: String?, isMandatory: Boolean) -> Unit
     ) {
 
         try {
             if (response.isNullOrEmpty()) {
-                listener.invoke("1", "")
+                listener.invoke("1", "", "", false)
             } else {
                 val json = JSONObject(response)
-                listener.invoke(json.getString("updateVersion"), json.getString("lastUpdate"))
+                var summary:String? = json.getString("notesRelease")
+                if(!summary.isNullOrEmpty() && summary == "null"){
+                    summary = null
+                }
+                listener.invoke(
+                    json.getString("updateVersion"), json.getString("lastUpdate"),
+                    summary,
+                    json.getBoolean("isMandatory")
+                )
             }
 
         } catch (ex: Exception) {
@@ -392,7 +428,6 @@ class VAnalytics private constructor(val context: Context) {
     }
 
 
-
     fun enableCrashes(isEnableCrash: Boolean) {
         this.sendCrasesh = isEnableCrash
     }
@@ -481,17 +516,18 @@ class VAnalytics private constructor(val context: Context) {
     fun sendVersionUsed() {
         asyncTask {
             try {
-                val urlEncode = "https://apiservice.vladymix.es/analitycs/versionLoad/data?package=${packageName}&sdk=${Build.VERSION.SDK_INT}&version=$versionName"
+                val urlEncode =
+                    "https://apiservice.vladymix.es/analitycs/versionLoad/data?package=${packageName}&sdk=${Build.VERSION.SDK_INT}&version=$versionName"
                 val url = URL(urlEncode)
                 val conn: HttpURLConnection = url.openConnection() as HttpURLConnection
                 conn.readTimeout = 1500
                 conn.connectTimeout = 1500
                 conn.requestMethod = "GET"
                 val responseCode: Int = conn.responseCode
-                if (responseCode == HttpsURLConnection.HTTP_OK){
-                    Log.i("App","Send data successful")
+                if (responseCode == HttpsURLConnection.HTTP_OK) {
+                    Log.i("App", "Send data successful")
                 }
-            }catch (ex: Exception){
+            } catch (ex: Exception) {
                 ex.printStackTrace()
             }
         }

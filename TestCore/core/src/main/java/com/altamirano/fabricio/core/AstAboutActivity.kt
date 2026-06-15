@@ -14,6 +14,10 @@ import com.altamirano.fabricio.core.dialogs.DialogLicence
 
 class AstAboutActivity : AppCompatActivity() {
 
+
+    /**
+     * Param override string ast_url_privacity with url of policy
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ast_activity_about)

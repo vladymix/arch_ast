@@ -3,4 +3,5 @@
     <color name="ast_background">#F6F6F6</color>
     <color name="ast_button_normal">#ebebeb</color>
     <color name="ast_background_card">#FAFAFA</color>
+    <color name="ast_color_accent">#2196F3</color>
 </resources>
