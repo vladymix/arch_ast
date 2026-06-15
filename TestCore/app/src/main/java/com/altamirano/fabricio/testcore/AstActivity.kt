@@ -1,7 +1,9 @@
 package com.altamirano.fabricio.testcore
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.altamirano.fabricio.core.AstAboutActivity
 import com.altamirano.fabricio.core.analytics.VAnalytics
 import com.altamirano.fabricio.core.dialogs.AstDialog
 
@@ -16,6 +18,8 @@ class AstActivity : AppCompatActivity() {
             this.setTitle("Hola")
             this.setMessage("Como estas")
         }.show()*/
+
+        //startActivity(Intent(this, AstAboutActivity::class.java))
 
     }
 }

@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/ast_background"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/ast_background">
 
     <RelativeLayout
         android:id="@+id/header"
@@ -12,13 +12,13 @@
 
         <ImageView
             android:id="@+id/astOnBack"
-            android:padding="10dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:padding="10dp"
             android:src="@drawable/ast_chevron_back"
             app:tint="?android:textColorPrimary" />
 
-     </RelativeLayout>
+    </RelativeLayout>
 
     <LinearLayout
 
@@ -37,93 +37,106 @@
             android:textSize="35sp" />
 
         <LinearLayout
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
             <TextView
-                android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@string/ast_version" />
+                android:text="@string/ast_version"
+                android:textSize="16sp" />
+
             <TextView
                 android:id="@+id/tvVersion"
-                android:layout_marginStart="5dp"
-                android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
                 android:text="1.0"
-                android:layout_marginLeft="5dp" />
+                android:textSize="16sp" />
 
 
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:padding="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:id="@+id/astbtnabout"
-            android:background="@drawable/ast_button_card"
-            android:minWidth="250dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginBottom="10dp"
             android:clickable="true"
-            android:gravity="center"
             android:focusable="true"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:gravity="center"
+            android:minWidth="250dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp">
+
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:textColor="?android:textColorPrimary"
                 android:text="@string/ast_lb_information"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textColor="?android:textColorPrimary" />
 
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:id="@+id/btnShowPolicy"
-            android:background="@drawable/ast_button_card"
-            android:minWidth="250dp"
-            android:clickable="true"
-            android:gravity="center"
-            android:focusable="true"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/ast_button_card"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:minWidth="250dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp">
+
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:textColor="?android:textColorPrimary"
                 android:text="@string/ast_lb_policy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:textColor="?android:textColorPrimary" />
 
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:id="@+id/astbtnshowcode"
-            android:background="@drawable/ast_button_card"
-            android:minWidth="250dp"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:gravity="center"
-            android:layout_marginBottom="10dp"
-            android:focusable="true"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/ast_button_card"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:minWidth="250dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp">
+
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:textColor="?android:textColorPrimary"
                 android:text="@string/ast_lab_licences"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
+                android:textColor="?android:textColorPrimary" />
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 

@@ -1,37 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="3dp"
-    android:background="@drawable/ast_shape_card">
+    android:background="@drawable/ast_shape_card"
+    android:minWidth="280dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="16dp"
-        android:paddingBottom="6dp">
-
+        android:padding="24dp">
 
         <TextView
             android:id="@+id/astTitle"
-            android:text="ffff"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="26dp"
-            android:layout_marginRight="26dp"
-            android:layout_marginBottom="10dp"
             android:textColor="?android:textColorPrimary"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            tools:text="Title" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="26dp"
-            android:layout_marginRight="26dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal">
 
             <ProgressBar
@@ -39,18 +33,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:layout_marginRight="20dp"
                 android:indeterminate="true"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:visibility="visible" />
 
             <TextView
-                android:text="ffff"
                 android:id="@+id/astMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="?android:textColorPrimary"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:text="Message" />
 
         </LinearLayout>
 
@@ -60,28 +54,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginTop="24dp"
             android:visibility="visible">
 
             <Button
-                android:visibility="gone"
-                tools:visibility="visible"
                 android:id="@+id/astBtnSecundary"
                 android:layout_width="wrap_content"
-                android:layout_height="34dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
                 android:background="?selectableItemBackground"
                 android:text="Cancelar"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
             <Button
                 android:id="@+id/astBtnPrimary"
                 android:layout_width="wrap_content"
-                android:layout_height="34dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:background="?selectableItemBackground"
                 android:text="Aceptar"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="6dp"
+        android:background="@drawable/ast_shape_card"
+        android:minWidth="280dp"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/astTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="18sp"
+                tools:text="@string/ast_msg_title_update" />
+
+            <TextView
+                android:id="@+id/astNewVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/ast_color_accent"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="V6.0" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/astMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="start"
+            tools:text="1. Correcion de bug\n2. Cambio de diseño\n3. Cambio de diseño" />
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:stretchColumns="0,1">
+
+            <TableRow>
+
+                <Button
+                    android:id="@+id/astBtnSecundary"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?selectableItemBackground"
+                    android:text="No Gracias"
+                    android:textColor="@color/ast_color_accent" />
+
+                <Button
+                    android:id="@+id/astBtnPrimary"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?selectableItemBackground"
+                    android:text="OK"
+                    android:textColor="@color/ast_color_accent"
+                    android:textStyle="bold" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/image_title"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ast_update" />
+
+</RelativeLayout>

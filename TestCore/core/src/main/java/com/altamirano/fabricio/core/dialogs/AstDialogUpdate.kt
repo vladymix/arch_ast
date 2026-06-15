@@ -1,6 +1,5 @@
 package com.altamirano.fabricio.core.dialogs
 
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
@@ -13,19 +12,18 @@ import androidx.core.content.ContextCompat
 import com.altamirano.fabricio.core.R
 import com.altamirano.fabricio.core.tools.ternary
 
-class AstDialog(context: Context, private val colorButtons: Int = R.color.ast_color_accent) : Dialog(context), DialogInterface {
-
+class AstDialogUpdate (context: Context, private val colorButtons: Int = R.color.ast_color_accent) : Dialog(context), DialogInterface {
 
     private var viewAsProgress: Boolean = false
-    lateinit var dialog: AlertDialog
     private var buttonPositive: ConfigButton? = null
     private var buttonNegative: ConfigButton? = null
     private var mMessage: String? = null
+    private var mVersion: String? = null
     private var mTitle: String? = null
 
     init {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        this.setContentView(R.layout.ast_dialog)
+        this.setContentView(R.layout.ast_dialog_update)
     }
 
     override fun setTitle(title: CharSequence?) {
@@ -34,6 +32,15 @@ class AstDialog(context: Context, private val colorButtons: Int = R.color.ast_co
 
     override fun setTitle(titleId: Int) {
         this.mTitle = this.context.getString(titleId)
+    }
+
+    fun setData(title: String, message: String, version: String){
+        this.mTitle = title
+        this.mMessage = message
+        this.mVersion = version
+        this.findViewById<TextView>(R.id.astTitle)?.text = title
+        this.findViewById<TextView>(R.id.astMessage)?.text = message
+        this.findViewById<TextView>(R.id.astNewVersion)?.text = version
     }
 
     fun setMessage(value: Int) {
@@ -99,6 +106,10 @@ class AstDialog(context: Context, private val colorButtons: Int = R.color.ast_co
             this.findViewById<TextView>(R.id.astMessage)?.text = it
         }
 
+        this.mVersion?.let {
+            this.findViewById<TextView>(R.id.astNewVersion)?.text = it
+        }
+
         this.findViewById<Button>(R.id.astBtnSecundary)?.setOnClickListener {
             this.dismiss()
         }
@@ -125,12 +136,10 @@ class AstDialog(context: Context, private val colorButtons: Int = R.color.ast_co
                 it.text = cb.title
                 it.setTextColor(colorButtons)
                 it.setOnClickListener {
-                        cb.listener?.onClick(this, DialogInterface.BUTTON_POSITIVE)
-                        this.dismiss()
-                    }
+                    cb.listener?.onClick(this, DialogInterface.BUTTON_POSITIVE)
+                    this.dismiss()
+                }
             }
-
-
         }
 
         if (buttonNegative == null && buttonPositive == null) {
