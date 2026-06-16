@@ -2,6 +2,7 @@ package com.altamirano.fabricio.core.tools
 
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import java.util.concurrent.Executors
 
 class TaskRunner{
@@ -9,11 +10,11 @@ class TaskRunner{
     private val handler = Handler(Looper.getMainLooper())
 
     fun <T> executeAsync(preExecute: (() -> Unit)?, doInBackground: () -> T?, postExecute: ((T?) -> Unit)? ){
+        preExecute?.invoke()
+        // 2. Ahora sí, mandamos el trabajo pesado al hilo de fondo
         executor.execute {
-            preExecute?.let {
-                handler.post(preExecute)
-            }
-           val result= doInBackground.invoke()
+            val result = doInBackground.invoke()
+            // 3. Pasamos el resultado al hilo principal
             handler.post {
                 postExecute?.invoke(result)
             }

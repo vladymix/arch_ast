@@ -7,9 +7,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.util.Log
-import androidx.appcompat.app.AlertDialog
 import com.altamirano.fabricio.core.R
-import com.altamirano.fabricio.core.dialogs.AstDialog
 import com.altamirano.fabricio.core.dialogs.AstDialogUpdate
 import com.altamirano.fabricio.core.tools.asyncTask
 import org.json.JSONObject
@@ -23,12 +21,12 @@ import javax.net.ssl.HttpsURLConnection
 import kotlin.collections.ArrayList
 
 class VAnalytics private constructor(val context: Context) {
-    private val events = ArrayList<AnalyticsEvent>()
+    private val mEvents = ArrayList<AnalyticsEvent>()
     private var sendCrasesh: Boolean = false
     var userName: String = ""
     private var versionName: String = "not_found"
     private var versionCode: Int = 0
-    private val packageName: String
+    private val packageName: String = context.packageName
 
     companion object {
         @SuppressLint("StaticFieldLeak")
@@ -42,12 +40,7 @@ class VAnalytics private constructor(val context: Context) {
         }
     }
 
-    var mOldHandler: Thread.UncaughtExceptionHandler? = null
-
     init {
-        packageName = context.packageName
-        mOldHandler = Thread.getDefaultUncaughtExceptionHandler()
-
         try {
             val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
             versionName = pInfo.versionName.orEmpty()
@@ -55,19 +48,26 @@ class VAnalytics private constructor(val context: Context) {
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
-
-        Thread.setDefaultUncaughtExceptionHandler { t, paramThrowable ->
-            paramThrowable.printStackTrace()
-            if (sendCrasesh) {
-                saveFile(paramThrowable)
-            }
-
-            if (mOldHandler == null) {
-                t.stop()
-            }
-            mOldHandler?.uncaughtException(t, paramThrowable)
-        }
         sendPendingFiles()
+    }
+
+    private var isSending = false
+    @Synchronized
+    private fun sendEvents(vAnalytics: VAnalytics) {
+        if(isSending){
+            return
+        }
+        isSending = true
+        asyncTask(preExecute = {
+
+        }, doInBackground = {
+            val copyOfList = ArrayList(mEvents)
+            copyOfList.forEach { item ->
+                vAnalytics.sendEvent(item)
+            }
+        }, postExecute = {
+            isSending = false
+        })
     }
 
     /**
@@ -109,26 +109,10 @@ class VAnalytics private constructor(val context: Context) {
                     gotoStore(context, mPackage)
                     d.dismiss()
                 }
-
                 dialog.setNegativeButton(context.getString(R.string.ast_btn_cancel)) { d, _ ->
                     d.dismiss()
                 }
                 dialog.show()
-
-                /* AlertDialog.Builder(context).apply {
-                     setTitle(context.getString(R.string.ast_msg_title_update))
-                     setMessage(context.getString(R.string.ast_msg_new_version))
-                     setPositiveButton(context.getString(R.string.ast_btn_accept)) { d, _ ->
-                         gotoStore(context, mPackage)
-                         d.dismiss()
-                     }
-                     setNegativeButton(context.getString(R.string.ast_btn_cancel)) { d, _ ->
-                         d.dismiss()
-                     }
-                     setCancelable(false)
-                     show()
-
-                 }*/
             }
         } catch (ex: Exception) {
             ex.printStackTrace()
@@ -319,6 +303,7 @@ class VAnalytics private constructor(val context: Context) {
                 return
             }
             item.isSending = true
+            Log.i("VAnalytics", "Send event $item")
 
             val jsonBulder = StringBuilder()
             jsonBulder.append("{")
@@ -418,12 +403,12 @@ class VAnalytics private constructor(val context: Context) {
 
     @Synchronized
     fun putEvent(type: TypeEVENT, name: String) {
-        events.add(AnalyticsEvent(packageName, type.toString(), name, false))
-        val copyOfList = ArrayList(events) // Crea una copia segura para hilos
-        asyncTask {
-            copyOfList.forEach { item ->
-                sendEvent(item)
-            }
+        try {
+            mEvents.add(AnalyticsEvent(packageName, type.toString(), name, false))
+            Log.i("VAnalytics", "save new event total ${mEvents.size}")
+            sendEvents(this)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
         }
     }
 
@@ -433,9 +418,15 @@ class VAnalytics private constructor(val context: Context) {
     }
 
     fun sendException(paramThrowable: Throwable) {
-        val message = "Error recoverable ${paramThrowable.message}"
-        val params = Log.getStackTraceString(paramThrowable)
-        sendDataException(message, params)
+        try {
+            asyncTask {
+                saveFile(paramThrowable)
+                sendPendingFiles()
+            }
+        }catch (ex: Exception){
+            ex.printStackTrace()
+        }
+
     }
 
     enum class TypeEVENT {

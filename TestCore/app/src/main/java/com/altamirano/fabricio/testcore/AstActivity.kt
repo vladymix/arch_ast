@@ -13,7 +13,16 @@ class AstActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        VAnalytics.getInstance(this).autoNeedUpdate(this,"1.0")
+        VAnalytics.getInstance(this).apply {
+          /* for (i in 0..3) {
+                this.sendException(Exception("Error from test index: $i"))
+                this.putEvent(VAnalytics.TypeEVENT.SCREEN, "AstActivity")
+                this.putEvent(VAnalytics.TypeEVENT.LOAD, "AstActivity")
+            }*/
+            this.autoNeedUpdate(this@AstActivity, "1.0")
+        }
+
+
 /*        AstDialog(this).apply {
             this.setTitle("Hola")
             this.setMessage("Como estas")
